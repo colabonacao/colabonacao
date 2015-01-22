@@ -18,7 +18,7 @@ public class MouseCameraControl : MonoBehaviour {
 			velocity = new Vector2(-Input.GetAxisRaw ("Mouse X")*speed,-Input.GetAxisRaw ("Mouse Y")*speed);
 		}
 
-		if (Input.GetMouseButtonUp (0)) 
+		if (Input.GetMouseButtonUp(0)) 
 		{
 			if (velocity.magnitude >= new Vector2(0.01f,0.01f).magnitude)
 			{

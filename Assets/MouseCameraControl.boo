@@ -3,6 +3,8 @@
 class MouseCameraControl (MonoBehaviour): 
 	hasinertia = false
 	velocity = Vector2(0,0)
+	minCamSize = 1
+	maxCamSize = 10
 	public inertia = 0.9f
 	public restrainTo as GameObject = null
 
@@ -29,12 +31,11 @@ class MouseCameraControl (MonoBehaviour):
 				
 		//Zoom
 		if (Input.GetAxis("Mouse ScrollWheel") < 0): // zoom back 
-			Camera.main.orthographicSize = Mathf.Max(Camera.main.orthographicSize-1, 1)
+			Camera.main.orthographicSize = Mathf.Max(Camera.main.orthographicSize-1, minCamSize)
 		if (Input.GetAxis("Mouse ScrollWheel") > 0): // zoom forward
-			Camera.main.orthographicSize = Mathf.Min(Camera.main.orthographicSize+1, 6)
+			Camera.main.orthographicSize = Mathf.Min(Camera.main.orthographicSize+1, maxCamSize)
 			
 		if restrainTo != null:
-			
 			camBL = Camera.main.ViewportToWorldPoint(Vector2(0,0))
 			camTR = Camera.main.ViewportToWorldPoint(Vector2(1,1))
 			cameraRect = Rect(camBL.x,camTR.y,camTR.x-camBL.x,camBL.y-camTR.y)
@@ -43,6 +44,6 @@ class MouseCameraControl (MonoBehaviour):
 			if cameraRect.right > restrainTo.renderer.bounds.max.x:
 				transform.position.x = restrainTo.renderer.bounds.max.x - cameraRect.width/2
 			if cameraRect.top > restrainTo.renderer.bounds.max.y:
-				transform.position.y = restrainTo.renderer.bounds.max.y + cameraRect.height/2
+				transform.position.y = restrainTo.renderer.bounds.max.y + cameraRect.height/2 //height is negative
 			if cameraRect.bottom < restrainTo.renderer.bounds.min.y:
-				transform.position.y = restrainTo.renderer.bounds.min.y - cameraRect.height/2
+				transform.position.y = restrainTo.renderer.bounds.min.y - cameraRect.height/2 //height is negative

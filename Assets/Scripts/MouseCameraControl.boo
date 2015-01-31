@@ -5,6 +5,7 @@ class MouseCameraControl (MonoBehaviour):
 	velocity = Vector2(0,0)
 	minCamSize = 1
 	maxCamSize = 10
+	startPosition = Vector3(0,0,0)
 	public inertia = 0.9f
 	public restrainTo as GameObject = null
 
@@ -12,10 +13,13 @@ class MouseCameraControl (MonoBehaviour):
 		pass
 	
 	def Update ():
+		if Input.GetMouseButtonDown(0):
+			startPosition = transform.position
+		
 		if Input.GetMouseButton(0):
 			hasinertia = false
 			velocity = Vector2(0,0)
-			speed = Camera.main.orthographicSize
+			speed = Camera.main.orthographicSize //reduce speed when zoomed in
 			transform.position += Vector3(-Input.GetAxisRaw ("Mouse X") * Time.deltaTime * speed, -Input.GetAxisRaw ("Mouse Y") * Time.deltaTime * speed, 0f)
 			velocity = Vector2(-Input.GetAxisRaw ("Mouse X")*speed,-Input.GetAxisRaw ("Mouse Y")*speed)
 		
@@ -47,3 +51,7 @@ class MouseCameraControl (MonoBehaviour):
 				transform.position.y = restrainTo.renderer.bounds.max.y + cameraRect.height/2 //height is negative
 			if cameraRect.bottom < restrainTo.renderer.bounds.min.y:
 				transform.position.y = restrainTo.renderer.bounds.min.y - cameraRect.height/2 //height is negative
+				
+	public def hasMoved():
+		//how much movement we will tolerate before considering this a click
+		return Vector3.Distance(startPosition,transform.position) > 0.15f 

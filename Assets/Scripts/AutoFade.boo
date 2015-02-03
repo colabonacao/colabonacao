@@ -57,6 +57,7 @@ class AutoFade (MonoBehaviour):
 
 	private def StartFade(aFadeOutTime as single, aFadeInTime as single, aColor as Color) as void:
 		m_Fading = true
+		EventSystems.EventSystem.current.enabled = false
 		StartCoroutine(Fade(aFadeOutTime, aFadeInTime, aColor))
 	
 	public static def LoadLevel(aLevelName as string, aFadeOutTime as single, aFadeInTime as single, aColor as Color) as void:

@@ -2,11 +2,13 @@
 
 class UIManager (MonoBehaviour): 
 
-	def StartGame ():
-		Application.LoadLevel('Main Game')
+	private def ChangeScene (sceneName as string):
+		AutoFade.LoadLevel(sceneName, 0.2f, 0.1f, Color.black)
 		PlayerPrefs.Save()
 		
+	def StartGame ():
+		ChangeScene('Main Game')
+		
 	def StartTutorial ():
-		Application.LoadLevel('Tutorial')
-		PlayerPrefs.Save()
+		ChangeScene('Tutorial')
 	

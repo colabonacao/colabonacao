@@ -24,3 +24,13 @@ class AudioSingleton(MonoBehaviour):
 		//If a Singleton already exists and you find
 		//another reference in scene, destroy it!
 			Destroy(self.gameObject)
+
+	def ClearSounds(time as single):
+		musics as (MusicClass) = (FindObjectsOfType(typeof(MusicClass)) as (MusicClass))
+		sounds as (SoundEffectClass) = (FindObjectsOfType(typeof(SoundEffectClass)) as (SoundEffectClass))
+		for music as MusicClass in musics:
+			if music.source == null:
+				Destroy(music.gameObject, time)
+		for sound as SoundEffectClass in sounds:
+			if sound.source == null:
+				Destroy(sound.gameObject, time)

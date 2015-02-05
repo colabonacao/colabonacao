@@ -4,15 +4,28 @@ class AudioManager (MonoBehaviour):
 
 	private singleton as AudioSingleton
 	
-	public MusicVolumeSlider as UI.Slider
-	public SoundVolumeSlider as UI.Slider
+	public musicVolumeSlider as UI.Slider
+	public soundVolumeSlider as UI.Slider
+	
+	public startMusic as MusicClass
 	
 	def Start ():
 		singleton = AudioSingleton.instance
-		if MusicVolumeSlider is not null:
-			MusicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1.0f)
-		if SoundVolumeSlider is not null:
-			SoundVolumeSlider.value = PlayerPrefs.GetFloat("SoundVolume", 1.0f)
+		children as (Transform)
+		children = self.GetComponentsInChildren[of Transform]()
+		singleChildren = singleton.GetComponentsInChildren[of Transform]()
+		for child as Transform in children:
+			if child.name != self.name:
+				for singleChild as Transform in singleChildren:
+					if child.name == singleChild.name:
+						Destroy(singleChild.gameObject)
+				child.parent = singleton.transform
+		if musicVolumeSlider is not null:
+			musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1.0f)
+		if soundVolumeSlider is not null:
+			soundVolumeSlider.value = PlayerPrefs.GetFloat("SoundVolume", 1.0f)
+		if startMusic is not null:
+			PlayMusic(startMusic.name)
 		
 	def MusicVolume (newVolume as single):
 		musics as (MusicClass)
@@ -21,7 +34,6 @@ class AudioManager (MonoBehaviour):
 			music.Volume(newVolume)
 		PlayerPrefs.SetFloat("MusicVolume", newVolume)
 		
-		
 	def SoundEffectsVolume (newVolume as single):
 		sounds as (SoundEffectClass)
 		sounds = singleton.GetComponentsInChildren[of SoundEffectClass]()
@@ -29,40 +41,36 @@ class AudioManager (MonoBehaviour):
 			sound.Volume(newVolume)
 		PlayerPrefs.SetFloat("SoundVolume", newVolume)
 		
-	/*
-		Acceptable values:
-			MM_music
-			
-		This uses string instead of enum because OnClick does not accept enums.
-	*/
 	def PlayMusic (id as string):
 		musics as (MusicClass)
 		musics = singleton.GetComponentsInChildren[of MusicClass]()
 		for music as MusicClass in musics:
-			music.source.Stop()
 			if music.name == id:
-				music.source.Play()
+				if music.source != null:
+					music.source.Play()
+			else:
+				if music.source != null:
+					music.source.Stop()
+				Destroy(music.gameObject)
 	
 	def StopMusics():
 		musics as (MusicClass)
 		musics = singleton.GetComponentsInChildren[of MusicClass]()
 		for music as MusicClass in musics:
-			music.source.Stop()
-	/*
-		Acceptable values:
-			button_select
-			
-		This uses int instead of enum because OnClick does not accept enums.
-	*/	
+			if music.source != null:
+				music.source.Stop()
+
 	def PlaySound (id as string):
 		sounds as (SoundEffectClass)
 		sounds = singleton.GetComponentsInChildren[of SoundEffectClass]()
 		for sound as SoundEffectClass in sounds:
 			if sound.name == id:
-				sound.source.Play()
+				if sound.source != null:
+					sound.source.Play()
 	
 	def StopSounds():
 		sounds as (SoundEffectClass)
 		sounds = singleton.GetComponentsInChildren[of SoundEffectClass]()
 		for sound as SoundEffectClass in sounds:
-			sound.source.Stop()
+			if sound.source != null:
+				sound.source.Stop()

@@ -8,3 +8,6 @@ class SoundEffectClass (MonoBehaviour):
 		if source != null:
 			source.volume = newVolume
 		
+	def ToggleOn(newState as bool):
+		source.mute = not newState
+		

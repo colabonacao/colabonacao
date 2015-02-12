@@ -4,8 +4,8 @@ class AudioManager (MonoBehaviour):
 
 	private singleton as AudioSingleton
 	
-	public musicVolumeSlider as UI.Slider
-	public soundVolumeSlider as UI.Slider
+	public musicVolumeToggle as UI.Toggle
+	public soundVolumeToggle as UI.Toggle
 	
 	public startMusic as MusicClass
 	
@@ -20,12 +20,26 @@ class AudioManager (MonoBehaviour):
 					if child.name == singleChild.name:
 						Destroy(singleChild.gameObject)
 				child.parent = singleton.transform
-		if musicVolumeSlider is not null:
-			musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1.0f)
-		if soundVolumeSlider is not null:
-			soundVolumeSlider.value = PlayerPrefs.GetFloat("SoundVolume", 1.0f)
+		if musicVolumeToggle is not null:
+			musicVolumeToggle.isOn = (true if PlayerPrefs.GetInt("MusicOn", 1) else false)
+		if soundVolumeToggle is not null:
+			soundVolumeToggle.isOn = (true if PlayerPrefs.GetInt("SoundOn", 1) else false)
 		if startMusic is not null:
 			PlayMusic(startMusic.name)
+		
+	def MusicToggle (newState as bool):
+		musics as (MusicClass)
+		musics = singleton.GetComponentsInChildren[of MusicClass]()
+		for music as MusicClass in musics:
+			music.ToggleOn(newState)
+		PlayerPrefs.SetInt("MusicOn", (1 if newState else 0))
+		
+	def SoundEffectsToggle (newState as bool):
+		sounds as (SoundEffectClass)
+		sounds = singleton.GetComponentsInChildren[of SoundEffectClass]()
+		for sound as SoundEffectClass in sounds:
+			sound.ToggleOn(newState)
+		PlayerPrefs.SetInt("SoundOn", (1 if newState else 0))
 		
 	def MusicVolume (newVolume as single):
 		musics as (MusicClass)

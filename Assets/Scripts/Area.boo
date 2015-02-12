@@ -1,9 +1,11 @@
 ﻿import UnityEngine
 import ClickDetect
+import InGameMenu
 
-class Area (ClickDetect): 
+class Area (ClickDetect):
+	public menu as InGameMenu = null
+	 
 	selected = false
-
 	def Start ():
 		renderer.material.color.a = 0.0f
 	
@@ -19,6 +21,8 @@ class Area (ClickDetect):
 			for area in areas:
 				area.setSelected(false)
 			renderer.material.color.a = 0.6f
+			if menu != null:
+				menu.invoke()
 		else:
 			renderer.material.color.a = 0.0f
 		selected = toset

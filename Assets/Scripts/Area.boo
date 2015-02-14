@@ -4,8 +4,9 @@ import InGameMenu
 
 class Area (ClickDetect):
 	public menu as InGameMenu = null
-	 
 	selected = false
+	selectable = true
+	
 	def Start ():
 		renderer.material.color.a = 0.0f
 	
@@ -13,7 +14,8 @@ class Area (ClickDetect):
 		pass
 			
 	override def OnClick():
-		setSelected(true)
+		if selectable:
+			setSelected(true)
 		
 	public def setSelected(toset):
 		if toset:
@@ -29,3 +31,6 @@ class Area (ClickDetect):
 		
 	public def isSelected():
 		return selected
+		
+	public def setSelectable(toset):
+		selectable = toset

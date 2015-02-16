@@ -9,6 +9,7 @@ class AudioSingleton(MonoBehaviour):
 			if _instance is null:
 				_instance = GameObject.FindObjectOfType(AudioSingleton)
 				
+			if _instance is not null:
 				//Tell unity not to destroy this object when loading a new scene!
 				DontDestroyOnLoad(_instance.gameObject)
 			

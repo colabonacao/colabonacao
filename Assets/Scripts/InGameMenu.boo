@@ -71,7 +71,6 @@ class InGameMenu (MonoBehaviour):
 		area.InvestimentoSeguranca = toset
 		
 	private def configAreaValues():
-		Debug.Log(area.InvestimentoEsporte)
 		SliderCultura.value = area.InvestimentoCultura
 		SliderEducacao.value = area.InvestimentoEducacao
 		SliderEsporte.value = area.InvestimentoEsporte

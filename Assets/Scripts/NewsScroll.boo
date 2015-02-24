@@ -1,8 +1,12 @@
 ﻿import UnityEngine
+import UnityEngine.UI
 import Area
 
 class NewsScroll (MonoBehaviour): 
 	news = []
+	textbox as Text = null
+	parent as Image = null
+	initx = 0
 
 	def Start ():
 		randomnews = [
@@ -10,7 +14,6 @@ class NewsScroll (MonoBehaviour):
 			News("Fome em {0} atinge níveis alarmantes",Modifier("modtrabalho",1.1)),
 			News("Nelson Carlos confirma show em {0}",Modifier()),
 			News("Grande assalto ao banco de {0} deixa mortos e feridos",Modifier("modseguranca",0.3)),
-			News("Grande assalto ao banco de {0} deixa mortoaushdoasuh ouashdu ohasouhduo houashdou aoushd uhouashdohusdauoh ouhasoudhouashd ouhasd uhasuohasudasoudoasdouhasouhdouahsoudhousahd houahsoudhasouhdoashoud haosuhdoaushdoaushdouhas oaushdoauhsdouahsdouha s e feridos",Modifier()),
 		]
 		
 		nums = []
@@ -23,9 +26,16 @@ class NewsScroll (MonoBehaviour):
 			nums.Push(num)
 		for i in nums:
 			news.Push(randomnews[i])
+
+		textbox = gameObject.GetComponentInChildren[of Text]()
+		textbox.text = [(n as News).getText() for n in news].Join("                                                               ")
+		initx = transform.position.x
 	
 	def Update ():
-		pass
+		if (transform.position.x + Camera.mainCamera.ScreenToWorldPoint(Vector3(textbox.preferredWidth+Screen.width/1.4,0,0)).x < 0):
+			transform.position.x = initx
+		
+		transform.position.x -= 1*Time.deltaTime
 
 class News():
 	text as string
@@ -41,14 +51,15 @@ class Modifier():
 	area as Area = null
 	
 	def constructor():
-		areas = GameObject.FindObjectsOfType(Area)
-		area = areas[Random.Range(0,len(areas))]
+		pickRandomArea()
 	
 	def constructor(investmentmod as string,modvalue as single):
-		areas = GameObject.FindObjectsOfType(Area)
-		area = areas[Random.Range(0,len(areas))]
+		pickRandomArea()
 			
 	def constructor(investmentmod as string,modvalue as single,areaname as string):
+		pickRandomArea()
+		
+	def pickRandomArea():
 		areas = GameObject.FindObjectsOfType(Area)
 		area = areas[Random.Range(0,len(areas))]
 			

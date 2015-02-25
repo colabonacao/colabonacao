@@ -20,10 +20,15 @@ class AudioManager (MonoBehaviour):
 					if child.name == singleChild.name:
 						Destroy(singleChild.gameObject)
 				child.parent = singleton.transform
+				
+		isMusicOn as bool = (true if PlayerPrefs.GetInt("MusicOn", 1) else false)
+		MusicToggle(isMusicOn)
+		isSoundOn as bool = (true if PlayerPrefs.GetInt("SoundOn", 1) else false)
+		SoundEffectsToggle(isSoundOn)
 		if musicVolumeToggle is not null:
-			musicVolumeToggle.isOn = (true if PlayerPrefs.GetInt("MusicOn", 1) else false)
+			musicVolumeToggle.isOn = isMusicOn
 		if soundVolumeToggle is not null:
-			soundVolumeToggle.isOn = (true if PlayerPrefs.GetInt("SoundOn", 1) else false)
+			soundVolumeToggle.isOn = isSoundOn
 		if startMusic is not null:
 			PlayMusic(startMusic.name)
 		

@@ -9,6 +9,9 @@ class UIManager (MonoBehaviour):
 	def StartGame ():
 		ChangeScene('Main Game')
 		
+	def StageSelect ():
+		ChangeScene('StageSelect')
+		
 	def StartTutorial ():
 		ChangeScene('Tutorial')
 	

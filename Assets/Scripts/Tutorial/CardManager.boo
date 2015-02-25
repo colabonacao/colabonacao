@@ -12,17 +12,17 @@ class CardManager (MonoBehaviour):
 		
 		
 	def PreviousCard ():
-		cards[currentCardIndex].GetComponent[of Animator]().SetBool("toRight", true)
 		if (currentCardIndex == 0):
-			cards[currentCardIndex].GetComponent[of Animator]().SetBool("toRight", false)
+			cards[currentCardIndex].GetComponent[of Animator]().Play('card_slide_cant')
 		else:
+			cards[currentCardIndex].GetComponent[of Animator]().SetBool("toRight", true)
 			currentCardIndex--
 			cards[currentCardIndex].GetComponent[of Animator]().SetBool("toLeft", false)
 	
 	def NextCard ():
-		cards[currentCardIndex].GetComponent[of Animator]().SetBool("toLeft", true)
 		if (currentCardIndex == (cards.Length - 1)):
-			cards[currentCardIndex].GetComponent[of Animator]().SetBool("toLeft", false)
+			cards[currentCardIndex].GetComponent[of Animator]().Play('card_slide_cant')
 		else:
+			cards[currentCardIndex].GetComponent[of Animator]().SetBool("toLeft", true)
 			currentCardIndex++
 			cards[currentCardIndex].GetComponent[of Animator]().SetBool("toRight", false)

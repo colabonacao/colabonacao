@@ -3,12 +3,25 @@ import ClickDetect
 import InGameMenu
 
 class Area (ClickDetect):
+	public Orcamento = 0
+	public InvestimentoCultura = 0
+	public InvestimentoEducacao = 0
+	public InvestimentoEsporte = 0
+	public InvestimentoInfraestrutura = 0
+	public InvestimentoMeioAmbiente = 0
+	public InvestimentoMobilidade = 0
+	public InvestimentoAgropecuaria = 0
+	public InvestimentoSaude = 0
+	public InvestimentoTrabalho = 0
+	public InvestimentoSeguranca = 0
+	
 	public menu as InGameMenu = null
 	selected = false
 	selectable = true
 	
 	def Start ():
 		renderer.material.color.a = 0.0f
+		
 	
 	def Update ():
 		pass
@@ -24,7 +37,7 @@ class Area (ClickDetect):
 				area.setSelected(false)
 			renderer.material.color.a = 0.6f
 			if menu != null:
-				menu.invoke()
+				menu.invoke(self)
 		else:
 			renderer.material.color.a = 0.0f
 		selected = toset

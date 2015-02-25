@@ -1,23 +1,49 @@
 ﻿import UnityEngine
+import UnityEngine.UI
 import MouseCameraControl
 import Area
 
 class InGameMenu (MonoBehaviour): 
-	public SliderCultura as UnityEngine.UI.Slider = null
-	public SliderEducacao as UnityEngine.UI.Slider = null
-	public SliderEsporte as UnityEngine.UI.Slider = null
-	public SliderInfraestrutura as UnityEngine.UI.Slider = null
-	public SliderMeioambiente as UnityEngine.UI.Slider = null
-	public SliderMobilidade as UnityEngine.UI.Slider = null
-	public SliderAgropecuaria as UnityEngine.UI.Slider = null
-	public SliderSaude as UnityEngine.UI.Slider = null
-	public SliderTrabalho as UnityEngine.UI.Slider = null
-	public SliderSeguranca as UnityEngine.UI.Slider = null
+	public ValueOrcamento as Text = null
+	public SliderCultura as Slider = null
+	public SliderEducacao as Slider = null
+	public SliderEsporte as Slider = null
+	public SliderInfraestrutura as Slider = null
+	public SliderMeioambiente as Slider = null
+	public SliderMobilidade as Slider = null
+	public SliderAgropecuaria as Slider = null
+	public SliderSaude as Slider = null
+	public SliderTrabalho as Slider = null
+	public SliderSeguranca as Slider = null
+	
+	private ValueCultura as Text = null
+	private ValueEducacao as Text = null
+	private ValueEsporte as Text = null
+	private ValueInfraestrutura as Text = null
+	private ValueMeioambiente as Text = null
+	private ValueMobilidade as Text = null
+	private ValueAgropecuaria as Text = null
+	private ValueSaude as Text = null
+	private ValueTrabalho as Text = null
+	private ValueSeguranca as Text = null
+	private city as City = null
 	
 	area as Area = null
 	mousecontrol as MouseCameraControl = null
 
 	def Start ():
+		city = GameObject.FindObjectOfType(City) as City
+		ValueCultura = SliderCultura.transform.FindChild("Value").GetComponent[of Text]()
+		ValueEducacao = SliderEducacao.transform.FindChild("Value").GetComponent[of Text]()
+		ValueEsporte = SliderEsporte.transform.FindChild("Value").GetComponent[of Text]()
+		ValueInfraestrutura = SliderInfraestrutura.transform.FindChild("Value").GetComponent[of Text]()
+		ValueMeioambiente = SliderMeioambiente.transform.FindChild("Value").GetComponent[of Text]()
+		ValueMobilidade = SliderMobilidade.transform.FindChild("Value").GetComponent[of Text]()
+		ValueAgropecuaria = SliderAgropecuaria.transform.FindChild("Value").GetComponent[of Text]()
+		ValueSaude = SliderSaude.transform.FindChild("Value").GetComponent[of Text]()
+		ValueTrabalho = SliderTrabalho.transform.FindChild("Value").GetComponent[of Text]()
+		ValueSeguranca = SliderSeguranca.transform.FindChild("Value").GetComponent[of Text]()
+		
 		dismiss()
 	
 	def Update ():
@@ -31,6 +57,7 @@ class InGameMenu (MonoBehaviour):
 		areas = GameObject.FindObjectsOfType(Area)
 		for area in areas:
 			area.setSelectable(false)
+		updateValueOrcamento()
 		
 	public def dismiss():
 		areas = GameObject.FindObjectsOfType(Area)
@@ -40,35 +67,58 @@ class InGameMenu (MonoBehaviour):
 		GameObject.FindObjectOfType(MouseCameraControl).enable()
 		gameObject.active = false
 		
+	def updateValueOrcamento():
+		ValueOrcamento.text = "\$ $(city.getOrcamento())"
+		
 	public def setInvestCultura(toset as single):
 		area.InvestimentoCultura = toset
+		ValueCultura.text = "\$ $(area.InvestimentoCultura)"
+		updateValueOrcamento()
 
 	public def setInvestEducacao(toset as single):
 		area.InvestimentoEducacao = toset
+		ValueEducacao.text = "\$ $(area.InvestimentoEducacao)"
+		updateValueOrcamento()
 
 	public def setInvestEsporte(toset as single):
 		area.InvestimentoEsporte = toset
+		ValueEsporte.text = "\$ $(area.InvestimentoEsporte)"
+		updateValueOrcamento()
 
 	public def setInvestInfraEstrutura(toset as single):
 		area.InvestimentoInfraestrutura = toset
+		ValueInfraestrutura.text = "\$ $(area.InvestimentoInfraestrutura)"
+		updateValueOrcamento()
 
 	public def setInvestMeioAmbiente(toset as single):
 		area.InvestimentoMeioAmbiente = toset
+		ValueMeioambiente.text = "\$ $(area.InvestimentoMeioAmbiente)"
+		updateValueOrcamento()
 
 	public def setInvestMobilidade(toset as single):
 		area.InvestimentoMobilidade = toset
+		ValueMobilidade.text = "\$ $(area.InvestimentoMobilidade)"
+		updateValueOrcamento()
 
 	public def setInvestAgropecuaria(toset as single):
 		area.InvestimentoAgropecuaria = toset
+		ValueAgropecuaria.text = "\$ $(area.InvestimentoAgropecuaria)"
+		updateValueOrcamento()
 
 	public def setInvestSaude(toset as single):
 		area.InvestimentoSaude = toset
+		ValueSaude.text = "\$ $(area.InvestimentoSaude)"
+		updateValueOrcamento()
 
 	public def setInvestTrabalho(toset as single):
 		area.InvestimentoTrabalho = toset
+		ValueTrabalho.text = "\$ $(area.InvestimentoTrabalho)"
+		updateValueOrcamento()
 
 	public def setInvestSeguranca(toset as single):
 		area.InvestimentoSeguranca = toset
+		ValueSeguranca.text = "\$ $(area.InvestimentoSeguranca)"
+		updateValueOrcamento()
 		
 	private def configAreaValues():
 		SliderCultura.value = area.InvestimentoCultura

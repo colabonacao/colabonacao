@@ -2,7 +2,7 @@
 
 class StageChosen (MonoBehaviour): 
 
-	public stagePicked as StageEnum.Stages = 0
+	public stagePicked as StageEnum.Stages = StageEnum.Stages.Brasilia
 	
 	def Awake() as void:
 		DontDestroyOnLoad(transform.gameObject)

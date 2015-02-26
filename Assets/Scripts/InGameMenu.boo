@@ -69,7 +69,8 @@ class InGameMenu (MonoBehaviour):
 		gameObject.active = false
 		
 	def updateValueOrcamento():
-		ValueOrcamento.text = "\$ $(city.getOrcamento())"
+		if (ValueOrcamento != null) and (city != null):
+			ValueOrcamento.text = "\$ $(city.getOrcamento())"
 		
 	public def setInvestCultura(toset as single):
 		area.InvestimentoCultura = toset

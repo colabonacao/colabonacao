@@ -4,6 +4,7 @@ import MouseCameraControl
 import Area
 
 class InGameMenu (MonoBehaviour): 
+	public CityName as Text = null
 	public ValueOrcamento as Text = null
 	public SliderCultura as Slider = null
 	public SliderEducacao as Slider = null
@@ -121,6 +122,7 @@ class InGameMenu (MonoBehaviour):
 		updateValueOrcamento()
 		
 	private def configAreaValues():
+		CityName.text = area.name
 		SliderCultura.value = area.InvestimentoCultura
 		SliderEducacao.value = area.InvestimentoEducacao
 		SliderEsporte.value = area.InvestimentoEsporte

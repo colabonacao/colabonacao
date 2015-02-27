@@ -2,11 +2,15 @@
 import Area
 
 class City (MonoBehaviour): 
-	public orcamentoinicial as single = 1000.0
+	private turn = 1
+	public orcamento as (single)
+	private caixa as single
 	private areas as (Area)
+	private city as City
 
 	def Start ():
 		areas = GameObject.FindObjectsOfType(Area)
+		caixa = orcamento[turn-1]/2
 	
 	def Update ():
 		pass
@@ -24,4 +28,11 @@ class City (MonoBehaviour):
 			gasto += a.InvestimentoSaude
 			gasto += a.InvestimentoTrabalho
 			gasto += a.InvestimentoSeguranca
-		return orcamentoinicial - gasto
+		return caixa - gasto
+		
+	def newTurn():
+		turn++
+		caixa = orcamento[turn-1]/2
+		
+	def getTurn():
+		return turn

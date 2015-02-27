@@ -5,7 +5,6 @@ import Area
 
 class InGameMenu (MonoBehaviour): 
 	public CityName as Text = null
-	public ValueOrcamento as Text = null
 	public SliderCultura as Slider = null
 	public SliderEducacao as Slider = null
 	public SliderEsporte as Slider = null
@@ -58,7 +57,6 @@ class InGameMenu (MonoBehaviour):
 		areas = GameObject.FindObjectsOfType(Area)
 		for area in areas:
 			area.setSelectable(false)
-		updateValueOrcamento()
 		
 	public def dismiss():
 		areas = GameObject.FindObjectsOfType(Area)
@@ -68,59 +66,45 @@ class InGameMenu (MonoBehaviour):
 		GameObject.FindObjectOfType(MouseCameraControl).enable()
 		gameObject.active = false
 		
-	def updateValueOrcamento():
-		if (ValueOrcamento != null) and (city != null):
-			ValueOrcamento.text = "\$ $(city.getOrcamento())"
-		
 	public def setInvestCultura(toset as single):
 		area.InvestimentoCultura = toset
 		ValueCultura.text = "\$ $(area.InvestimentoCultura)"
-		updateValueOrcamento()
 
 	public def setInvestEducacao(toset as single):
 		area.InvestimentoEducacao = toset
 		ValueEducacao.text = "\$ $(area.InvestimentoEducacao)"
-		updateValueOrcamento()
 
 	public def setInvestEsporte(toset as single):
 		area.InvestimentoEsporte = toset
 		ValueEsporte.text = "\$ $(area.InvestimentoEsporte)"
-		updateValueOrcamento()
 
 	public def setInvestInfraEstrutura(toset as single):
 		area.InvestimentoInfraestrutura = toset
 		ValueInfraestrutura.text = "\$ $(area.InvestimentoInfraestrutura)"
-		updateValueOrcamento()
 
 	public def setInvestMeioAmbiente(toset as single):
 		area.InvestimentoMeioAmbiente = toset
 		ValueMeioambiente.text = "\$ $(area.InvestimentoMeioAmbiente)"
-		updateValueOrcamento()
 
 	public def setInvestMobilidade(toset as single):
 		area.InvestimentoMobilidade = toset
 		ValueMobilidade.text = "\$ $(area.InvestimentoMobilidade)"
-		updateValueOrcamento()
 
 	public def setInvestAgropecuaria(toset as single):
 		area.InvestimentoAgropecuaria = toset
 		ValueAgropecuaria.text = "\$ $(area.InvestimentoAgropecuaria)"
-		updateValueOrcamento()
 
 	public def setInvestSaude(toset as single):
 		area.InvestimentoSaude = toset
 		ValueSaude.text = "\$ $(area.InvestimentoSaude)"
-		updateValueOrcamento()
 
 	public def setInvestTrabalho(toset as single):
 		area.InvestimentoTrabalho = toset
 		ValueTrabalho.text = "\$ $(area.InvestimentoTrabalho)"
-		updateValueOrcamento()
 
 	public def setInvestSeguranca(toset as single):
 		area.InvestimentoSeguranca = toset
 		ValueSeguranca.text = "\$ $(area.InvestimentoSeguranca)"
-		updateValueOrcamento()
 		
 	private def configAreaValues():
 		CityName.text = area.name

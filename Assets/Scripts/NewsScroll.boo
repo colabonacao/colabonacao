@@ -150,7 +150,7 @@ News("Onda de protestos pelo mundo se diz inspirada pelo exemplo brasileiro",Mod
 		if (transform.position.x + Camera.mainCamera.ScreenToWorldPoint(Vector3(textbox.preferredWidth+Screen.width/1.4,0,0)).x < 0):
 			transform.position.x = initx
 		
-		transform.position.x -= 1*Time.deltaTime
+		transform.position.x -= 0.2*Time.deltaTime*Camera.mainCamera.orthographicSize
 
 class News():
 	text as string

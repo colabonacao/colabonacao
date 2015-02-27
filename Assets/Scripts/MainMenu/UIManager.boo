@@ -24,7 +24,7 @@ class UIManager (MonoBehaviour):
 		PlayerPrefs.Save()
 		
 	def StartGame ():
-		ChangeScene('Main Game')
+		ChangeScene('Main Game - Megarushing')
 		
 	def StartStageSelect ():
 		if (tutorialArea.activeSelf):

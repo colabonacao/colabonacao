@@ -3,6 +3,26 @@
 class EndEnum (MonoBehaviour): 
 
 	public enum Endings:
-		Success
+		SuccessComplete
+		SuccessModerate
+		SuccessSmall
 		FailEducation
 		FailCulture
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

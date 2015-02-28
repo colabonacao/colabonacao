@@ -2,7 +2,7 @@
 
 class EndCheck (MonoBehaviour): 
 
-	public endPicked as EndEnum.Endings = EndEnum.Endings.Success
+	public endPicked as EndEnum.Endings = EndEnum.Endings.SuccessComplete
 	public stagePicked as StageEnum.Stages = StageEnum.Stages.Brasilia
 	public statsSprite as Sprite = null
 	public stageChosen as StageChosen = null

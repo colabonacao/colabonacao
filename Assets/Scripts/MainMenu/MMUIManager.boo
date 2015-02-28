@@ -1,9 +1,12 @@
 ﻿import UnityEngine
 
-class UIManager (MonoBehaviour): 
+class MMUIManager (MonoBehaviour): 
 
 	public tutorialArea as GameObject
 	public tutorialPrefab as GameObject
+	
+	public creditsArea as GameObject
+	public creditsPrefab as GameObject
 	
 	public blackBackground as GameObject
 	public mainMenu as GameObject
@@ -18,6 +21,7 @@ class UIManager (MonoBehaviour):
 	public historyText as Text
 		
 	private tutorialObj as GameObject
+	private creditsObj as GameObject
 	
 	private menuState as int = 0
 	
@@ -31,6 +35,10 @@ class UIManager (MonoBehaviour):
 				StopStageSelectDetails()
 			elif (menuState == 10):
 				StartTutorial()
+			elif (menuState == 11):
+				StartCredits()
+			else:
+				Application.Quit()
 	
 	private def ChangeScene (sceneName as string):
 		AutoFade.LoadLevel(sceneName, 0.2f, 0.1f, Color.black)
@@ -78,4 +86,15 @@ class UIManager (MonoBehaviour):
 			menuState = 0
 			tutorialArea.SetActive(false)
 			Destroy(tutorialObj)
+			
+	def StartCredits ():
+		if (not creditsArea.activeSelf):
+			menuState = 11
+			creditsObj = Instantiate(creditsPrefab as GameObject)
+			creditsObj.transform.SetParent(creditsArea.transform, false)
+			creditsArea.SetActive(true)
+		else:
+			menuState = 0
+			creditsArea.SetActive(false)
+			Destroy(creditsObj)
 	

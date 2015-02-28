@@ -1,9 +1,8 @@
 ﻿import UnityEngine
 import UnityEngine.UI
-import MouseCameraControl
 import Area
 
-class InGameMenu (MonoBehaviour): 
+class AreaMenu (RegularMenu): 
 	public CityName as Text = null
 	public SliderCultura as Slider = null
 	public SliderEducacao as Slider = null
@@ -29,9 +28,8 @@ class InGameMenu (MonoBehaviour):
 	private city as City = null
 	
 	area as Area = null
-	mousecontrol as MouseCameraControl = null
 
-	def Start ():
+	new def Start ():
 		city = GameObject.FindObjectOfType(City) as City
 		ValueCultura = SliderCultura.transform.FindChild("Value").GetComponent[of Text]()
 		ValueEducacao = SliderEducacao.transform.FindChild("Value").GetComponent[of Text]()
@@ -46,25 +44,13 @@ class InGameMenu (MonoBehaviour):
 		
 		dismiss()
 	
-	def Update ():
+	new def Update ():
 		pass
 		
 	public def invoke(areatocontrol as Area):
 		area = areatocontrol
+		invoke()
 		configAreaValues()
-		gameObject.active = true
-		GameObject.FindObjectOfType(MouseCameraControl).disable()
-		areas = GameObject.FindObjectsOfType(Area)
-		for area in areas:
-			area.setSelectable(false)
-		
-	public def dismiss():
-		areas = GameObject.FindObjectsOfType(Area)
-		for area in areas:
-			area.setSelected(false)
-			area.setSelectable(true)
-		GameObject.FindObjectOfType(MouseCameraControl).enable()
-		gameObject.active = false
 		
 	public def setInvestCultura(toset as single):
 		area.InvestimentoCultura = toset

@@ -1,5 +1,6 @@
 ﻿import UnityEngine
 import UnityEngine.UI
+import City
 
 class Date (MonoBehaviour): 
 	private textbox as Text

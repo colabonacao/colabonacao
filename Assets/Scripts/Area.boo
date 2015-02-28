@@ -1,9 +1,9 @@
 ﻿import UnityEngine
 import ClickDetect
-import InGameMenu
+import AreaMenu
+import UnityEngine.UI
 
-class Area (ClickDetect):
-	public Orcamento = 0
+class Area (MonoBehaviour):
 	public InvestimentoCultura = 0
 	public InvestimentoEducacao = 0
 	public InvestimentoEsporte = 0
@@ -15,18 +15,21 @@ class Area (ClickDetect):
 	public InvestimentoTrabalho = 0
 	public InvestimentoSeguranca = 0
 	
-	public menu as InGameMenu = null
-	selected = false
-	selectable = true
+	private menu as AreaMenu = null
+	private selected = false
+	private selectable = true
+	private areaimage as Image = null 
 	
 	def Start ():
-		renderer.material.color.a = 0.0f
-		
+		areaimage = gameObject.GetComponent[of Image]() as Image
+		areaimage.color = Color(0,0,0,0)
+		(gameObject.GetComponent[of Button]() as Button).onClick.AddListener(OnClick)
+		menu = (GameObject.FindObjectsOfTypeAll(AreaMenu) as (AreaMenu))[0]
 	
 	def Update ():
 		pass
 			
-	override def OnClick():
+	def OnClick():
 		if selectable:
 			setSelected(true)
 		
@@ -35,11 +38,17 @@ class Area (ClickDetect):
 			areas = GameObject.FindObjectsOfType(Area)
 			for area in areas:
 				area.setSelected(false)
-			renderer.material.color.a = 0.6f
+			if areaimage != null:
+				areaimage.color = Color(0,0,0,0.6f)
 			if menu != null:
 				menu.invoke(self)
 		else:
-			renderer.material.color.a = 0.0f
+			if isinvested():
+			   	if areaimage != null:
+			   		areaimage.color = Color(0.2,0.6,0.2,0.2)
+			else:
+				if areaimage != null:
+					areaimage.color = Color(0,0,0,0)
 		selected = toset
 		
 	public def isSelected():
@@ -47,3 +56,15 @@ class Area (ClickDetect):
 		
 	public def setSelectable(toset):
 		selectable = toset
+		
+	public def isinvested():
+		return InvestimentoCultura > 0 or\
+			   InvestimentoEducacao > 0 or\
+			   InvestimentoEsporte > 0 or\
+			   InvestimentoInfraestrutura > 0 or\
+			   InvestimentoMeioAmbiente > 0 or\
+			   InvestimentoMobilidade > 0 or\
+			   InvestimentoSaude > 0 or\
+			   InvestimentoTrabalho > 0 or\
+			   InvestimentoSeguranca > 0 or\
+			   InvestimentoAgropecuaria > 0

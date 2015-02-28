@@ -3,6 +3,7 @@ import UnityEngine.UI
 import MouseCameraControl
 import Area
 
+
 class RegularMenu (MonoBehaviour): 
 	public AnimatedPanel as Animator
 	
@@ -13,10 +14,12 @@ class RegularMenu (MonoBehaviour):
 		pass
 		
 	public def invoke():
+		menus = GameObject.FindObjectsOfType(RegularMenu) as (RegularMenu)
+		for m in menus:
+			m.dismiss()
 		gameObject.active = true
 		//AnimatedPanel.SetBool("slideOut",false) 
-		GameObject.FindObjectOfType(MouseCameraControl).disable()
-		areas = GameObject.FindObjectsOfType(Area)
+		areas = GameObject.FindObjectsOfType(Area) as (Area)
 		for area in areas:
 			area.setSelectable(false)
 			
@@ -26,7 +29,6 @@ class RegularMenu (MonoBehaviour):
 		for area in areas:
 			area.setSelected(false)
 			area.setSelectable(true)
-		GameObject.FindObjectOfType(MouseCameraControl).enable()
 		gameObject.active = false
 		
 		

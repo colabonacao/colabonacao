@@ -1,5 +1,6 @@
 ﻿import UnityEngine
 import UnityEngine.UI
+import City
 
 class Orcamento (MonoBehaviour): 
 	private textbox as Text

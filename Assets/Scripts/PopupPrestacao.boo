@@ -1,23 +1,13 @@
 ﻿import UnityEngine
+import RegularPopup
 
-class PopupPrestacao (MonoBehaviour): 
+class PopupPrestacao (RegularPopup): 
 
-	def Start ():
+	new def Start ():
 		gameObject.active = false
 	
-	def Update ():
+	new def Update ():
 		pass
+
+
 		
-	def Show():
-		GameObject.FindObjectOfType(MouseCameraControl).disable()
-		gamemenu = GameObject.FindObjectOfType(InGameMenu) as InGameMenu
-		if gamemenu != null:
-			gamemenu.dismiss()
-		gameObject.active = true
-		
-	def Dismiss():
-		GameObject.FindObjectOfType(MouseCameraControl).enable()
-		gamemenu = GameObject.FindObjectOfType(InGameMenu) as InGameMenu
-		if gamemenu != null:
-			gamemenu.dismiss()
-		gameObject.active = false

@@ -12,10 +12,15 @@ class PinchZoom (MonoBehaviour):
 	
 	def Start():
 		t = transform as RectTransform
-		minCamSize = t.sizeDelta.x
-		maxCamSize = 3000
+		//keep Aspect
 		yproportion = t.sizeDelta.y/t.sizeDelta.x
+		t.sizeDelta.x = Screen.width * 3
+		t.sizeDelta.y = Screen.width * 3 * yproportion
+		minCamSize = t.sizeDelta.x
+		maxCamSize = t.sizeDelta.x*2
 		parentscrollview = gameObject.GetComponentInParent(ScrollRect) as ScrollRect
+		t.sizeDelta.x += 2*orthoZoomSpeed
+		t.sizeDelta.y += 2*orthoZoomSpeed*yproportion
 		
 	def adjustpivot(widthchange as single):
 		localPositionPivotRelative as Vector2

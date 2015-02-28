@@ -15,7 +15,6 @@ class EndChosen (MonoBehaviour):
 		if stageCheckInstance is not null:
 			stagePicked = stageCheckInstance.stagePicked
 		
-		
 	def SetEnding(selected as EndEnum.Endings, statsImg as Sprite) as void:
 		endPicked = selected
 		statsSprite = statsImg

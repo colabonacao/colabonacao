@@ -1,5 +1,4 @@
 ﻿import UnityEngine
-import ClickDetect
 import AreaMenu
 import UnityEngine.UI
 

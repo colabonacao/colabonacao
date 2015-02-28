@@ -3,7 +3,7 @@ import UnityEngine.UI
 import Area
 
 class AreaMenu (RegularMenu): 
-	public CityName as Text = null
+	public AreaName as Text = null
 	public SliderCultura as Slider = null
 	public SliderEducacao as Slider = null
 	public SliderEsporte as Slider = null
@@ -93,7 +93,7 @@ class AreaMenu (RegularMenu):
 		ValueSeguranca.text = "\$ $(area.InvestimentoSeguranca)"
 		
 	private def configAreaValues():
-		CityName.text = area.name
+		AreaName.text = area.name
 		SliderCultura.value = area.InvestimentoCultura
 		SliderEducacao.value = area.InvestimentoEducacao
 		SliderEsporte.value = area.InvestimentoEsporte
@@ -104,5 +104,18 @@ class AreaMenu (RegularMenu):
 		SliderSaude.value = area.InvestimentoSaude
 		SliderTrabalho.value = area.InvestimentoTrabalho
 		SliderSeguranca.value = area.InvestimentoSeguranca
+		SliderCultura.value = area.InvestimentoCultura
+
+		SliderEducacao.maxValue = city.getCaixa()
+		SliderEsporte.maxValue = city.getCaixa()
+		SliderInfraestrutura.maxValue = city.getCaixa()
+		SliderMeioambiente.maxValue = city.getCaixa()
+		SliderMobilidade.maxValue = city.getCaixa()
+		SliderAgropecuaria.maxValue = city.getCaixa()
+		SliderSaude.maxValue = city.getCaixa()
+		SliderTrabalho.maxValue = city.getCaixa()
+		SliderSeguranca.maxValue = city.getCaixa()
+		SliderCultura.maxValue = city.getCaixa()
+		
 		
 

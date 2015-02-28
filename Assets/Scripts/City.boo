@@ -30,6 +30,9 @@ class City (MonoBehaviour):
 			gasto += a.InvestimentoSeguranca
 		return caixa - gasto
 		
+	public def getCaixa():
+		return caixa
+		
 	def newTurn():
 		turn++
 		caixa = orcamento[turn-1]/2

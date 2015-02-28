@@ -93,6 +93,8 @@ class MMUIManager (MonoBehaviour):
 			creditsObj = Instantiate(creditsPrefab as GameObject)
 			creditsObj.transform.SetParent(creditsArea.transform, false)
 			creditsArea.SetActive(true)
+			closeButton = creditsArea.FindObjectOfType(Button)
+			closeButton.onClick.AddListener({StartCredits()})
 		else:
 			menuState = 0
 			creditsArea.SetActive(false)

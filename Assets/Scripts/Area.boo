@@ -18,6 +18,7 @@ class Area (MonoBehaviour):
 	private selected = false
 	private selectable = true
 	private areaimage as Image = null 
+	private players as (Player)
 	
 	def Start ():
 		areaimage = gameObject.GetComponent[of Image]() as Image
@@ -67,3 +68,10 @@ class Area (MonoBehaviour):
 			   InvestimentoTrabalho > 0 or\
 			   InvestimentoSeguranca > 0 or\
 			   InvestimentoAgropecuaria > 0
+	
+	public def setPlayers(toset):
+		players = toset
+		
+	public def getPlayer(x):
+		return players[x]
+

@@ -9,7 +9,7 @@ class StageCheck (MonoBehaviour):
 	"João Pessoa","Curitiba","Recife","Terezina","Rio de Janeiro","Natal","Porto Alegre","Porto Velho",
 	"Boa Vista","Florianópolis","São Paulo","Aracaju","Palmas"]
 	
-	def Awake ():
+	def Start():
 		
 		StageChosenInstance = GameObject.FindObjectOfType(StageChosen)
 		
@@ -27,7 +27,8 @@ class StageCheck (MonoBehaviour):
 		t.position = Vector3(0,0,0)
 		t.sizeDelta = Vector3(0,0,0)
 		t.localScale = Vector3(1,1,1)
-		
+		audioman = GameObject.FindObjectOfType(AudioManager) as AudioManager
+		audioman.PlayMusic((cityObj.GetComponent[of City]() as City).getMusicName())
 		cityObj.name = citynames[stagePicked]
 		
 		

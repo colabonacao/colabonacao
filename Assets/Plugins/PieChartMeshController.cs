@@ -21,9 +21,8 @@ public class PieChartMeshController : MonoBehaviour
     {
     }
 
-	public void setValues()
+	public void setValues(float[] mData)
 	{
-		mData = GenerateRandomValues(11);
 		mPieChart.Draw(mData);
 	}
 

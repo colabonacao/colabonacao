@@ -9,7 +9,7 @@ class AudioManager (MonoBehaviour):
 	
 	public startMusic as MusicClass
 	
-	def Start ():
+	def Awake ():
 		singleton = AudioSingleton.instance
 		children as (Transform)
 		children = self.GetComponentsInChildren[of Transform]()

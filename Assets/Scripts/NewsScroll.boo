@@ -2,7 +2,7 @@
 import UnityEngine.UI
 import Area
 
-class NewsScroll (MonoBehaviour): 
+public class NewsScroll (MonoBehaviour): 
 	news = []
 	textbox as Text = null
 	parent as Image = null
@@ -151,8 +151,11 @@ News("Onda de protestos pelo mundo se diz inspirada pelo exemplo brasileiro",Mod
 			transform.position.x = initx
 		
 		transform.position.x -= 0.2*Time.deltaTime*Camera.mainCamera.orthographicSize
+		
+	def getNews():
+		return news
 
-class News():
+public class News():
 	text as string
 	modifier as Modifier
 	def constructor(settext,setmodifier):

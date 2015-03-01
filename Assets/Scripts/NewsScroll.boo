@@ -165,6 +165,9 @@ public class News():
 	def getText():
 		return text
 		
+	def getSourceSprite():
+		return null
+		
 class Modifier():
 	investment as string
 	duration as int

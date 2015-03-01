@@ -3,11 +3,12 @@
 class NewsItem (MonoBehaviour): 
 	
 	public newsText as Text
-	//public newsNote as GameObject
+	public newsLogo as Image
 	
 	def Awake():
-		newsText.fontSize = (14 * Screen.width/800)
+		newsText.fontSize = (newsText.fontSize * Screen.width/800)
 
-	def SetNews(description as string, hasNote as bool):
+	def SetNews(description as string, logo as Sprite):
 		newsText.text = description
-		//newsNote.SetActive(hasNote)
+		if (logo is not null):
+			newsLogo.sprite = logo

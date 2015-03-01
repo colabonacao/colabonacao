@@ -13,11 +13,8 @@ class EndTurnChangeStats (MonoBehaviour):
 	def SetStats(choice as int, image as Sprite, name as string):
 		if (name != "") and (name is not null):
 			stats[choice].chartName = name
-		if (image is not null):
-			stats[choice].chartImage = image
 		
 	def ShowStats(choice as int):
 		chartName.text = stats[choice].chartName
-		chartImage.sprite = stats[choice].chartImage
 
 	

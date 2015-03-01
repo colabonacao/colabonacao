@@ -22,6 +22,7 @@ public class PieChartMesh : MonoBehaviour
 
     public void Init(float[] data, int slices, float rotatioAngle, float radius, Material[] materials)
     {
+		Init(data);
         mData = data;
         mSlices = slices;
         mRotationAngle = rotatioAngle;
@@ -36,9 +37,6 @@ public class PieChartMesh : MonoBehaviour
         }
         
         mMaterials = materials;
-
-
-        Init(data);
     }
 
     public void Init(float[] data)

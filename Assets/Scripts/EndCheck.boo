@@ -11,8 +11,11 @@ class EndCheck (MonoBehaviour):
 	public statisticsPieArea as GameObject
 	public endingAnim as (GameObject)
 	
+	private endEnumInstance as EndEnum
+	
 	def Awake ():
 		EndChosenInstance = GameObject.FindObjectOfType(EndChosen)
+		endEnumInstance = GameObject.FindObjectOfType(EndEnum)
 		
 		if EndChosenInstance is not null:
 			finalStats = EndChosenInstance.finalStats
@@ -30,54 +33,54 @@ class EndCheck (MonoBehaviour):
 		resultsText as string = ""
 		if (finalStats[0] < 0.45f):
 			if (finalStats[0] < 0.20f):
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.CriticalFailAgro]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailAgro]
 			else:
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.FailAgro]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.FailAgro]
 		elif (finalStats[1] < 0.45f):
 			if (finalStats[1] < 0.20f):
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.CriticalFailCult]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailCult]
 			else:
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.FailCult]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.FailCult]
 		elif (finalStats[2] < 0.45f):
 			if (finalStats[2] < 0.20f):
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.CriticalFailEdu]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailEdu]
 			else:
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.FailEdu]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.FailEdu]
 		elif (finalStats[3] < 0.45f):
 			if (finalStats[3] < 0.20f):
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.CriticalFailEsp]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailEsp]
 			else:
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.FailEsp]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.FailEsp]
 		elif (finalStats[4] < 0.45f):
 			if (finalStats[4] < 0.20f):
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.CriticalFailInfra]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailInfra]
 			else:
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.FailInfra]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.FailInfra]
 		elif (finalStats[5] < 0.45f):
 			if (finalStats[5] < 0.20f):
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.CriticalFailMeio]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailMeio]
 			else:
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.FailMeio]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.FailMeio]
 		elif (finalStats[6] < 0.45f):
 			if (finalStats[6] < 0.20f):
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.CriticalFailMobi]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailMobi]
 			else:
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.FailMobi]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.FailMobi]
 		elif (finalStats[7] < 0.45f):
 			if (finalStats[7] < 0.20f):
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.CriticalFailSaude]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailSaude]
 			else:
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.FailSaude]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.FailSaude]
 		elif (finalStats[8] < 0.45f):
 			if (finalStats[8] < 0.20f):
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.CriticalFailSeg]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailSeg]
 			else:
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.FailSeg]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.FailSeg]
 		elif (finalStats[9] < 0.45f):
 			if (finalStats[9] < 0.20f):
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.CriticalFailTrab]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailTrab]
 			else:
-				resultsText = resultsText + EndEnum.endingsText[EndEnum.Endings.FailTrab]
+				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.FailTrab]
 				
 		
 		statisticsText.text = resultsText

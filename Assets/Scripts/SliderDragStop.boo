@@ -27,6 +27,5 @@ class SliderDragStop (MonoBehaviour):
 		if areaMenu is null:
 			areaMenu = GameObject.FindObjectOfType(AreaMenu) as AreaMenu
 		areaMenu.setLastSlider(slider)
-		Debug.Log("areaSet")
 		
 		

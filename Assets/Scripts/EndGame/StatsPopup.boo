@@ -3,7 +3,6 @@ import UnityEngine.UI
 
 class StatsPopup (RegularPopup): 
 	
-	private selections = ["Resumo Geral","Você","Jogador 2","Jogador 3","Jogador 4","Jogador 5","Jogador 6","Jogador 7","Jogador 8"]
 	public piechart as PieChartMeshController 
 	private city as City = null
 
@@ -18,17 +17,17 @@ class StatsPopup (RegularPopup):
 		
 	def setPieChartGeneral():
 		piechart.setValues((
-		((city.getInvestimentoAgropecuariaTotal(-1))/(city.getCaixa()*8)),\
-		((city.getInvestimentoCulturaTotal(-1))/(city.getCaixa()*8)),\
-		((city.getInvestimentoEducacaoTotal(-1))/(city.getCaixa()*8)),\
-		((city.getInvestimentoEsporteTotal(-1))/(city.getCaixa()*8)),\
-		((city.getInvestimentoInfraestruturaTotal(-1))/(city.getCaixa()*8)),\
-		((city.getInvestimentoMeioAmbienteTotal(-1))/(city.getCaixa()*8)),\
-		((city.getInvestimentoMobilidadeTotal(-1))/(city.getCaixa()*8)),\
-		((city.getInvestimentoSaudeTotal(-1))/(city.getCaixa()*8)),\
-		((city.getInvestimentoSegurancaTotal(-1))/(city.getCaixa()*8)),\
-		((city.getInvestimentoTrabalhoTotal(-1))/(city.getCaixa()*8)),
-		((city.getInvestimentoDisponivelTotal(-1))/(city.getCaixa()*8))))
+		((city.getInvestimentoAgropecuariaAllTurns())/(city.getCaixaAllTurns()*8)),\
+		((city.getInvestimentoCulturaAllTurns())/(city.getCaixaAllTurns()*8)),\
+		((city.getInvestimentoEducacaoAllTurns())/(city.getCaixaAllTurns()*8)),\
+		((city.getInvestimentoEsporteAllTurns())/(city.getCaixaAllTurns()*8)),\
+		((city.getInvestimentoInfraestruturaAllTurns())/(city.getCaixaAllTurns()*8)),\
+		((city.getInvestimentoMeioAmbienteAllTurns())/(city.getCaixaAllTurns()*8)),\
+		((city.getInvestimentoMobilidadeAllTurns())/(city.getCaixaAllTurns()*8)),\
+		((city.getInvestimentoSaudeAllTurns())/(city.getCaixaAllTurns()*8)),\
+		((city.getInvestimentoSegurancaAllTurns())/(city.getCaixaAllTurns()*8)),\
+		((city.getInvestimentoTrabalhoAllTurns())/(city.getCaixaAllTurns()*8)),
+		((city.getInvestimentoDisponivelAllTurns())/(city.getCaixaAllTurns()*8))))
 		
 	override def dismiss():
 		super()

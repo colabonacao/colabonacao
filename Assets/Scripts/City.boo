@@ -328,6 +328,12 @@ class City (MonoBehaviour):
 		for i in range(turn):
 			total += getInvestimentoSegurancaTotal(i)
 		return total
+		
+	public def getInvestimentoDisponivelAllTurns() as single:
+		total = 0.0F
+		for i in range(turn):
+			total += getInvestimentoDisponivelTotal(i)
+		return total
 
 	
 

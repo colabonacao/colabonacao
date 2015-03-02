@@ -2,7 +2,8 @@
 
 class EndCheck (MonoBehaviour): 
 
-	public finalStats as (single) = (0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
+	private city as City
+	private news as NewsScroll
 	public stagePicked as StageEnum.Stages = StageEnum.Stages.Brasilia
 	public statsPie as GameObject = null
 	public stageChosen as StageChosen = null
@@ -18,10 +19,12 @@ class EndCheck (MonoBehaviour):
 		endEnumInstance = GameObject.FindObjectOfType(EndEnum)
 		
 		if EndChosenInstance is not null:
-			finalStats = EndChosenInstance.finalStats
-			stagePicked = EndChosenInstance.stagePicked
-			statsPie = EndChosenInstance.statsPie
-			
+			city = EndChosenInstance.getCity()
+			city.gotoending = false
+			news = EndChosenInstance.getNews()
+			stagePicked = EndChosenInstance.getStagePicked()
+			city.transform.SetParent(gameObject.transform, false)
+			news.transform.SetParent(gameObject.transform, false)
 			Destroy(EndChosenInstance.gameObject)
 			
 		if stageChosen is not null:
@@ -31,6 +34,7 @@ class EndCheck (MonoBehaviour):
 			
 	def SetEnding():
 		resultsText as string = ""
+		
 		if (finalStats[0] < 0.45f):
 			if (finalStats[0] < 0.20f):
 				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailAgro]

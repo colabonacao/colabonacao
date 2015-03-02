@@ -35,6 +35,8 @@ class SelectorStats (MonoBehaviour):
 		textbox.text = selections[index]
 		if (index >= 1):
 			setPieChartValues(index -1)
+		else:
+			setPieChartGeneral()
 		
 	def setPieChartValues(player):
 		piechart.setValues((

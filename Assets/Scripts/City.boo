@@ -3,11 +3,13 @@ import Area
 
 class City (MonoBehaviour): 
 	private turn = 0
+	private maxturns = 4
 	public orcamento as (single)
 	public MusicName as string
 	private caixa as single
 	private areas as (Area)
 	private city as City
+	public gotoending = true
 
 	def Start ():
 		areas = GameObject.FindObjectsOfType(Area)
@@ -15,7 +17,9 @@ class City (MonoBehaviour):
 		generateRandomPlayers()
 	
 	def Update ():
-		pass
+		//pass
+		if gotoending:
+			newTurn()
 		
 	def getOrcamento() as single:
 		gasto = 0
@@ -37,6 +41,10 @@ class City (MonoBehaviour):
 		
 	def newTurn():
 		turn++
+		if turn >= maxturns:
+			turn--
+			(GameObject.FindObjectOfType(EndChosen) as EndChosen).setEnding()
+			return
 		caixa = orcamento[turn]/2
 		generateRandomPlayers()
 		(GameObject.FindObjectOfType(ButtonHistorico) as ButtonHistorico).activate()
@@ -248,4 +256,12 @@ class City (MonoBehaviour):
 		gasto += getInvestimentoTrabalhoTotal(turnnum)
 		gasto += getInvestimentoSegurancaTotal(turnnum)
 		return getCaixaAtTurn(turnnum)*8-gasto
+		
+	
+		
+	public def getInvestimentoCulturaTodosTurnos() as single:
+		total = 0.0F
+		for i in range(turn):
+			total += getInvestimentoCulturaTotal(i)
+		return total
 

@@ -7,7 +7,7 @@ class PopupPrestacao (RegularPopup):
 	public contentbox as GameObject
 	private starty as single = 0
 
-	override def Initialize ():
+	override def initialize():
 		super()
 		gameObject.active = false
 		starty = (contentbox.transform as RectTransform).localPosition.y

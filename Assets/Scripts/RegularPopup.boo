@@ -12,13 +12,13 @@ class RegularPopup (MonoBehaviour):
 		
 	virtual public def invoke():
 		if not initialized:
-			Initialize()
+			initialize()
 		gameObject.active = true
 		
 	virtual public def dismiss():
 		gameObject.active = false
 		
-	virtual public def Initialize():
+	virtual public def initialize():
 		initialized = true
-		
+
 	

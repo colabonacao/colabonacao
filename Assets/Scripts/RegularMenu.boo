@@ -17,7 +17,7 @@ class RegularMenu (MonoBehaviour):
 		
 	public def invoke():
 		if not initialized:
-			Initialize()
+			initialize()
 		menus = GameObject.FindObjectsOfType(RegularMenu) as (RegularMenu)
 		for m in menus:
 			m.dismiss()
@@ -35,7 +35,7 @@ class RegularMenu (MonoBehaviour):
 			area.setSelectable(true)
 		gameObject.active = false
 		
-	virtual public def Initialize():
+	virtual public def initialize():
 		initialized = true
 		dismiss()
 		

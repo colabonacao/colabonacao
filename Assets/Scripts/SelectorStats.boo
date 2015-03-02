@@ -19,6 +19,8 @@ class SelectorStats (MonoBehaviour):
 		pass
 		
 	def nextselection():
+		if city == null:
+			city = GameObject.FindObjectOfType(City) as City
 		index = (index + 1) % len(selections)
 		textbox.text = selections[index]
 		if (index >= 1):
@@ -27,6 +29,8 @@ class SelectorStats (MonoBehaviour):
 			setPieChartGeneral()
 			
 	def previousselection():
+		if city == null:
+			city = GameObject.FindObjectOfType(City) as City
 		index = ((index - 1) < 0) and (len(selections)-1) or (index-1)
 		textbox.text = selections[index]
 		if (index >= 1):

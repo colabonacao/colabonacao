@@ -29,7 +29,7 @@ class AreaMenu (RegularMenu):
 	
 	area as Area = null
 
-	override def Initialize ():
+	override def initialize ():
 		super()
 		city = GameObject.FindObjectOfType(City) as City
 		ValueCultura = SliderCultura.transform.FindChild("Value").GetComponent[of Text]()

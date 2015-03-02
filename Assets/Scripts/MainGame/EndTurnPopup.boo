@@ -8,11 +8,13 @@ class EndTurnPopup (RegularPopup):
 	public chartName as Text
 	private city as City = null
 
-	override def Initialize():
+	override def initialize():
 		super()
 		city = GameObject.FindObjectOfType(City) as City
 		
 	def ShowStats(choice as int):
+		if city == null:
+			city = GameObject.FindObjectOfType(City) as City
 		chartName.text = selections[choice]
 		if choice >= 1:
 			setPieChartValues(choice-1)

@@ -35,7 +35,7 @@ class EndCheck (MonoBehaviour):
 	def SetEnding():
 		resultsText as string = ""
 		
-		if (finalStats[0] < 0.45f):
+		/*if (finalStats[0] < 0.45f):
 			if (finalStats[0] < 0.20f):
 				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.CriticalFailAgro]
 			else:
@@ -87,7 +87,7 @@ class EndCheck (MonoBehaviour):
 				resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.FailTrab]
 				
 		
-		statisticsText.text = resultsText
+		statisticsText.text = resultsText*/
 		//statisticsImage.sprite = statsSprite
 		//anim = Instantiate(endings[endPicked].resultAnim as GameObject)
 		//anim.transform.SetParent(endingAnim.transform, false)

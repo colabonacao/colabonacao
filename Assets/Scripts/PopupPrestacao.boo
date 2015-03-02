@@ -5,9 +5,10 @@ import RegularPopup
 class PopupPrestacao (RegularPopup): 
 	public warningbox as Text
 	public contentbox as GameObject
-	private starty as single
+	private starty as single = 0
 
-	new def Start ():
+	override def Initialize ():
+		super()
 		gameObject.active = false
 		starty = (contentbox.transform as RectTransform).localPosition.y
 	

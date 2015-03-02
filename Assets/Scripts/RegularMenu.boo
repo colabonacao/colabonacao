@@ -6,14 +6,18 @@ import Area
 
 class RegularMenu (MonoBehaviour): 
 	public AnimatedPanel as Animator
+	protected initialized as bool = false
 	
 	def Start ():
-		dismiss()
+		if not initialized:
+			dismiss()
 	
 	def Update ():
 		pass
 		
 	public def invoke():
+		if not initialized:
+			Initialize()
 		menus = GameObject.FindObjectsOfType(RegularMenu) as (RegularMenu)
 		for m in menus:
 			m.dismiss()
@@ -30,6 +34,10 @@ class RegularMenu (MonoBehaviour):
 			area.setSelected(false)
 			area.setSelectable(true)
 		gameObject.active = false
+		
+	virtual public def Initialize():
+		initialized = true
+		dismiss()
 		
 		
 		

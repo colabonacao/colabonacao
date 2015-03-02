@@ -16,7 +16,7 @@ class Date (MonoBehaviour):
 	def Update ():
 		timeelapsed = timeelapsed + Time.deltaTime
 		daystoadd = Mathf.Floor(timeelapsed / 1.6)
-		monthstoadd = (city.getTurn()-1) * 6
+		monthstoadd = (city.getTurn()) * 6
 		//if time is up
 		if (dt + dt.AddDays(daystoadd).AddMonths(monthstoadd).Subtract(dt.AddMonths(monthstoadd))).Month > 5:
 			//only on casual - stop the timer

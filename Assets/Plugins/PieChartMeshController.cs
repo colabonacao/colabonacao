@@ -5,7 +5,7 @@ public class PieChartMeshController : MonoBehaviour
     PieChartMesh mPieChart;
     float[] mData;
 
-    void Start()
+    void Awake()
     {
         mPieChart = gameObject.AddComponent("PieChartMesh") as PieChartMesh;
         if (mPieChart != null)

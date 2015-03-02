@@ -29,7 +29,8 @@ class AreaMenu (RegularMenu):
 	
 	area as Area = null
 
-	new def Start ():
+	override def Initialize ():
+		super()
 		city = GameObject.FindObjectOfType(City) as City
 		ValueCultura = SliderCultura.transform.FindChild("Value").GetComponent[of Text]()
 		ValueEducacao = SliderEducacao.transform.FindChild("Value").GetComponent[of Text]()
@@ -48,63 +49,63 @@ class AreaMenu (RegularMenu):
 		pass
 		
 	public def invoke(areatocontrol as Area):
-		area = areatocontrol
 		invoke()
+		area = areatocontrol
 		configAreaValues()
 		
 	public def setInvestCultura(toset as single):
-		area.InvestimentoCultura = toset
-		ValueCultura.text = "\$ $(area.InvestimentoCultura)"
+		area.setInvestimentoCultura(toset)
+		ValueCultura.text = "\$ $(area.getInvestimentoCultura())"
 
 	public def setInvestEducacao(toset as single):
-		area.InvestimentoEducacao = toset
-		ValueEducacao.text = "\$ $(area.InvestimentoEducacao)"
+		area.setInvestimentoEducacao(toset)
+		ValueEducacao.text = "\$ $(area.getInvestimentoEducacao())"
 
 	public def setInvestEsporte(toset as single):
-		area.InvestimentoEsporte = toset
-		ValueEsporte.text = "\$ $(area.InvestimentoEsporte)"
+		area.setInvestimentoEsporte(toset)
+		ValueEsporte.text = "\$ $(area.getInvestimentoEsporte())"
 
 	public def setInvestInfraEstrutura(toset as single):
-		area.InvestimentoInfraestrutura = toset
-		ValueInfraestrutura.text = "\$ $(area.InvestimentoInfraestrutura)"
+		area.setInvestimentoInfraestrutura(toset)
+		ValueInfraestrutura.text = "\$ $(area.getInvestimentoInfraestrutura())"
 
 	public def setInvestMeioAmbiente(toset as single):
-		area.InvestimentoMeioAmbiente = toset
-		ValueMeioambiente.text = "\$ $(area.InvestimentoMeioAmbiente)"
+		area.setInvestimentoMeioAmbiente(toset)
+		ValueMeioambiente.text = "\$ $(area.getInvestimentoMeioAmbiente())"
 
 	public def setInvestMobilidade(toset as single):
-		area.InvestimentoMobilidade = toset
-		ValueMobilidade.text = "\$ $(area.InvestimentoMobilidade)"
+		area.setInvestimentoMobilidade(toset)
+		ValueMobilidade.text = "\$ $(area.getInvestimentoMobilidade())"
 
 	public def setInvestAgropecuaria(toset as single):
-		area.InvestimentoAgropecuaria = toset
-		ValueAgropecuaria.text = "\$ $(area.InvestimentoAgropecuaria)"
+		area.setInvestimentoAgropecuaria(toset)
+		ValueAgropecuaria.text = "\$ $(area.getInvestimentoAgropecuaria())"
 
 	public def setInvestSaude(toset as single):
-		area.InvestimentoSaude = toset
-		ValueSaude.text = "\$ $(area.InvestimentoSaude)"
+		area.setInvestimentoSaude(toset)
+		ValueSaude.text = "\$ $(area.getInvestimentoSaude())"
 
 	public def setInvestTrabalho(toset as single):
-		area.InvestimentoTrabalho = toset
-		ValueTrabalho.text = "\$ $(area.InvestimentoTrabalho)"
+		area.setInvestimentoTrabalho(toset)
+		ValueTrabalho.text = "\$ $(area.getInvestimentoTrabalho())"
 
 	public def setInvestSeguranca(toset as single):
-		area.InvestimentoSeguranca = toset
-		ValueSeguranca.text = "\$ $(area.InvestimentoSeguranca)"
+		area.setInvestimentoSeguranca(toset)
+		ValueSeguranca.text = "\$ $(area.getInvestimentoSeguranca())"
 		
 	private def configAreaValues():
 		AreaName.text = area.name
-		SliderCultura.value = area.InvestimentoCultura
-		SliderEducacao.value = area.InvestimentoEducacao
-		SliderEsporte.value = area.InvestimentoEsporte
-		SliderInfraestrutura.value = area.InvestimentoInfraestrutura
-		SliderMeioambiente.value = area.InvestimentoMeioAmbiente
-		SliderMobilidade.value = area.InvestimentoMobilidade
-		SliderAgropecuaria.value = area.InvestimentoAgropecuaria
-		SliderSaude.value = area.InvestimentoSaude
-		SliderTrabalho.value = area.InvestimentoTrabalho
-		SliderSeguranca.value = area.InvestimentoSeguranca
-		SliderCultura.value = area.InvestimentoCultura
+		SliderCultura.value = area.getInvestimentoCultura()
+		SliderEducacao.value = area.getInvestimentoEducacao()
+		SliderEsporte.value = area.getInvestimentoEsporte()
+		SliderInfraestrutura.value = area.getInvestimentoInfraestrutura()
+		SliderMeioambiente.value = area.getInvestimentoMeioAmbiente()
+		SliderMobilidade.value = area.getInvestimentoMobilidade()
+		SliderAgropecuaria.value = area.getInvestimentoAgropecuaria()
+		SliderSaude.value = area.getInvestimentoSaude()
+		SliderTrabalho.value = area.getInvestimentoTrabalho()
+		SliderSeguranca.value = area.getInvestimentoSeguranca()
+		SliderCultura.value = area.getInvestimentoCultura()
 
 		SliderEducacao.maxValue = city.getCaixa()
 		SliderEsporte.maxValue = city.getCaixa()

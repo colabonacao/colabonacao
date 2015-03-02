@@ -9,7 +9,7 @@ class City (MonoBehaviour):
 	private caixa as single
 	private areas as (Area)
 	private city as City
-	public gotoending = false
+	public gotoending = true
 
 	def Start ():
 		areas = GameObject.FindObjectsOfType(Area)

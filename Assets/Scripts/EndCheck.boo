@@ -12,6 +12,8 @@ class EndCheck (MonoBehaviour):
 	public statisticsPieArea as GameObject
 	public endingAnim as (GameObject)
 	
+	public audioManager as AudioManager
+	
 	private endEnumInstance as EndEnum
 	
 	def Awake ():
@@ -269,16 +271,21 @@ class EndCheck (MonoBehaviour):
 		if absolutesuccess:
 			endingAnim[0].SetActive(true)
 			resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.SuccessComplete]
+			audioManager.PlayMusic(endingAnim[0].GetComponent[of AnimMusic]().musicName)
 		elif partialsuccess:
 			endingAnim[1].SetActive(true)
 			resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.SuccessModerate]
-		elif partialsuccess:
+			audioManager.PlayMusic(endingAnim[1].GetComponent[of AnimMusic]().musicName)
+		elif initialsuccess:
 			endingAnim[2].SetActive(true)
 			resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.SuccessSmall]
+			audioManager.PlayMusic(endingAnim[2].GetComponent[of AnimMusic]().musicName)
 		elif partialfail:
 			endingAnim[3].SetActive(true)
+			audioManager.PlayMusic(endingAnim[3].GetComponent[of AnimMusic]().musicName)
 		elif chaoticfail:
 			endingAnim[4].SetActive(true)
+			audioManager.PlayMusic(endingAnim[4].GetComponent[of AnimMusic]().musicName)
 			
 		statisticsText.text = resultsText
 		//statisticsImage.sprite = statsSprite

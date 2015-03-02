@@ -2,7 +2,7 @@
 import Area
 
 class City (MonoBehaviour): 
-	private turn = 0
+	private turn as int = 0
 	private maxturns = 4
 	public orcamento as (single)
 	public MusicName as string
@@ -13,13 +13,17 @@ class City (MonoBehaviour):
 
 	def Start ():
 		areas = GameObject.FindObjectsOfType(Area)
-		caixa = orcamento[turn]/2
+		t = turn/2
+		caixa = orcamento[t]/2
 		generateRandomPlayers()
 	
 	def Update ():
 		//pass
 		if gotoending:
 			newTurn()
+			
+	def getAreas():
+		return areas
 		
 	def getOrcamento() as single:
 		gasto = 0
@@ -42,10 +46,11 @@ class City (MonoBehaviour):
 	def newTurn():
 		turn++
 		if turn >= maxturns:
-			turn--
+			gotoending = false
 			(GameObject.FindObjectOfType(EndChosen) as EndChosen).setEnding()
 			return
-		caixa = orcamento[turn]/2
+		t = turn/2
+		caixa = orcamento[t]/2
 		generateRandomPlayers()
 		(GameObject.FindObjectOfType(ButtonHistorico) as ButtonHistorico).activate()
 		for a in areas:
@@ -54,10 +59,17 @@ class City (MonoBehaviour):
 	def getTurn():
 		return turn
 		
-	def getCaixaAtTurn(turnnum as single):
+	def getCaixaAtTurn(turnnum as int):
 		if (turnnum < 0):
 			turnnum = turn + 1 + turnnum
-		return orcamento[turnnum]/2
+		t = turnnum/2
+		return orcamento[t]/2
+		
+	public def getCaixaAllTurns():
+		total = 0.0F
+		for i in range(turn):
+			total += getCaixaAtTurn(i)
+		return total
 
 	public def getMusicName():
 		return MusicName
@@ -76,7 +88,7 @@ class City (MonoBehaviour):
 			sum as single = 0.0F
 			for j in range(len(areas)*10):
 				sum += randomnums[j]
-			factor = caixa/sum
+			factor = (caixa/sum)*0.50 // bots invest 50% less
 			for j in randomnums:
 				j = j*factor
 			playervals.Add(randomnums)
@@ -108,67 +120,67 @@ class City (MonoBehaviour):
 				playerlist[p].InvestimentoSeguranca = (playervals[p-1] as (single))[9+a*10]
 			areas[a].AddPlayers(playerlist)
 			
-	public def getInvestimentoCulturaPlayer(playernum,turnnum) as single:
+	public def getInvestimentoCulturaPlayer(playernum,turnnum as int) as single:
 		total = 0.0F
 		for a in areas:
 			total += a.getInvestimentoCulturaPlayer(playernum,turnnum)
 		return total
 		
-	public def getInvestimentoEducacaoPlayer(playernum,turnnum) as single:
+	public def getInvestimentoEducacaoPlayer(playernum,turnnum as int) as single:
 		total = 0.0F
 		for a in areas:
 			total += a.getInvestimentoEducacaoPlayer(playernum,turnnum)
 		return total
 		
-	public def getInvestimentoEsportePlayer(playernum,turnnum) as single:
+	public def getInvestimentoEsportePlayer(playernum,turnnum as int) as single:
 		total = 0.0F
 		for a in areas:
 			total += a.getInvestimentoEsportePlayer(playernum,turnnum)
 		return total
 		
-	public def getInvestimentoInfraestruturaPlayer(playernum,turnnum) as single:
+	public def getInvestimentoInfraestruturaPlayer(playernum,turnnum as int) as single:
 		total = 0.0F
 		for a in areas:
 			total += a.getInvestimentoInfraestruturaPlayer(playernum,turnnum)
 		return total
 		
-	public def getInvestimentoMeioAmbientePlayer(playernum,turnnum) as single:
+	public def getInvestimentoMeioAmbientePlayer(playernum,turnnum as int) as single:
 		total = 0.0F
 		for a in areas:
 			total += a.getInvestimentoMeioAmbientePlayer(playernum,turnnum)
 		return total
 		
-	public def getInvestimentoMobilidadePlayer(playernum,turnnum) as single:
+	public def getInvestimentoMobilidadePlayer(playernum,turnnum as int) as single:
 		total = 0.0F
 		for a in areas:
 			total += a.getInvestimentoMobilidadePlayer(playernum,turnnum)
 		return total
 		
-	public def getInvestimentoAgropecuariaPlayer(playernum,turnnum) as single:
+	public def getInvestimentoAgropecuariaPlayer(playernum,turnnum as int) as single:
 		total = 0.0F
 		for a in areas:
 			total += a.getInvestimentoAgropecuariaPlayer(playernum,turnnum)
 		return total
 		
-	public def getInvestimentoSaudePlayer(playernum,turnnum) as single:
+	public def getInvestimentoSaudePlayer(playernum,turnnum as int) as single:
 		total = 0.0F
 		for a in areas:
 			total += a.getInvestimentoSaudePlayer(playernum,turnnum)
 		return total
 		
-	public def getInvestimentoTrabalhoPlayer(playernum,turnnum) as single:
+	public def getInvestimentoTrabalhoPlayer(playernum,turnnum as int) as single:
 		total = 0.0F
 		for a in areas:
 			total += a.getInvestimentoTrabalhoPlayer(playernum,turnnum)
 		return total
 		
-	public def getInvestimentoSegurancaPlayer(playernum,turnnum) as single:
+	public def getInvestimentoSegurancaPlayer(playernum,turnnum as int) as single:
 		total = 0.0F
 		for a in areas:
 			total += a.getInvestimentoSegurancaPlayer(playernum,turnnum)
 		return total
 		
-	public def getInvestimentoDisponivelPlayer(playernum,turnnum) as single:
+	public def getInvestimentoDisponivelPlayer(playernum,turnnum as int) as single:
 		gasto = 0.0F
 		for a in areas:
 			gasto += a.getInvestimentoCulturaPlayer(playernum,turnnum)
@@ -183,67 +195,67 @@ class City (MonoBehaviour):
 			gasto += a.getInvestimentoSegurancaPlayer(playernum,turnnum)
 		return getCaixaAtTurn(turnnum)-gasto
 		
-	public def getInvestimentoCulturaTotal(turnnum) as single:
+	public def getInvestimentoCulturaTotal(turnnum as int) as single:
 		total = 0.0F
 		for i in range(8):
 			total += getInvestimentoCulturaPlayer(i,turnnum)
 		return total
 
-	public def getInvestimentoEducacaoTotal(turnnum) as single:
+	public def getInvestimentoEducacaoTotal(turnnum as int) as single:
 		total = 0.0F
 		for i in range(8):
 			total += getInvestimentoEducacaoPlayer(i,turnnum)
 		return total
 
-	public def getInvestimentoEsporteTotal(turnnum) as single:
+	public def getInvestimentoEsporteTotal(turnnum as int) as single:
 		total = 0.0F
 		for i in range(8):
 			total += getInvestimentoEsportePlayer(i,turnnum)
 		return total
 
-	public def getInvestimentoInfraestruturaTotal(turnnum) as single:
+	public def getInvestimentoInfraestruturaTotal(turnnum as int) as single:
 		total = 0.0F
 		for i in range(8):
 			total += getInvestimentoInfraestruturaPlayer(i,turnnum)
 		return total
 
-	public def getInvestimentoMeioAmbienteTotal(turnnum) as single:
+	public def getInvestimentoMeioAmbienteTotal(turnnum as int) as single:
 		total = 0.0F
 		for i in range(8):
 			total += getInvestimentoMeioAmbientePlayer(i,turnnum)
 		return total
 
-	public def getInvestimentoMobilidadeTotal(turnnum) as single:
+	public def getInvestimentoMobilidadeTotal(turnnum as int) as single:
 		total = 0.0F
 		for i in range(8):
 			total += getInvestimentoMobilidadePlayer(i,turnnum)
 		return total
 
-	public def getInvestimentoAgropecuariaTotal(turnnum) as single:
+	public def getInvestimentoAgropecuariaTotal(turnnum as int) as single:
 		total = 0.0F
 		for i in range(8):
 			total += getInvestimentoAgropecuariaPlayer(i,turnnum)
 		return total
 
-	public def getInvestimentoSaudeTotal(turnnum) as single:
+	public def getInvestimentoSaudeTotal(turnnum as int) as single:
 		total = 0.0F
 		for i in range(8):
 			total += getInvestimentoSaudePlayer(i,turnnum)
 		return total
 
-	public def getInvestimentoTrabalhoTotal(turnnum) as single:
+	public def getInvestimentoTrabalhoTotal(turnnum as int) as single:
 		total = 0.0F
 		for i in range(8):
 			total += getInvestimentoTrabalhoPlayer(i,turnnum)
 		return total
 
-	public def getInvestimentoSegurancaTotal(turnnum) as single:
+	public def getInvestimentoSegurancaTotal(turnnum as int) as single:
 		total = 0.0F
 		for i in range(8):
 			total += getInvestimentoSegurancaPlayer(i,turnnum)
 		return total
 
-	public def getInvestimentoDisponivelTotal(turnnum) as single:
+	public def getInvestimentoDisponivelTotal(turnnum as int) as single:
 		gasto = 0.0F
 		gasto += getInvestimentoCulturaTotal(turnnum)
 		gasto += getInvestimentoEducacaoTotal(turnnum)
@@ -257,11 +269,67 @@ class City (MonoBehaviour):
 		gasto += getInvestimentoSegurancaTotal(turnnum)
 		return getCaixaAtTurn(turnnum)*8-gasto
 		
-	
-		
-	public def getInvestimentoCulturaTodosTurnos() as single:
+	public def getInvestimentoCulturaAllTurns() as single:
 		total = 0.0F
 		for i in range(turn):
 			total += getInvestimentoCulturaTotal(i)
 		return total
+
+	public def getInvestimentoEducacaoAllTurns() as single:
+		total = 0.0F
+		for i in range(turn):
+			total += getInvestimentoEducacaoTotal(i)
+		return total
+
+	public def getInvestimentoEsporteAllTurns() as single:
+		total = 0.0F
+		for i in range(turn):
+			total += getInvestimentoEsporteTotal(i)
+		return total
+
+	public def getInvestimentoInfraestruturaAllTurns() as single:
+		total = 0.0F
+		for i in range(turn):
+			total += getInvestimentoInfraestruturaTotal(i)
+		return total
+
+	public def getInvestimentoMeioAmbienteAllTurns() as single:
+		total = 0.0F
+		for i in range(turn):
+			total += getInvestimentoMeioAmbienteTotal(i)
+		return total
+
+	public def getInvestimentoMobilidadeAllTurns() as single:
+		total = 0.0F
+		for i in range(turn):
+			total += getInvestimentoMobilidadeTotal(i)
+		return total
+
+	public def getInvestimentoAgropecuariaAllTurns() as single:
+		total = 0.0F
+		for i in range(turn):
+			total += getInvestimentoAgropecuariaTotal(i)
+		return total
+
+	public def getInvestimentoSaudeAllTurns() as single:
+		total = 0.0F
+		for i in range(turn):
+			total += getInvestimentoSaudeTotal(i)
+		return total
+
+	public def getInvestimentoTrabalhoAllTurns() as single:
+		total = 0.0F
+		for i in range(turn):
+			total += getInvestimentoTrabalhoTotal(i)
+		return total
+
+	public def getInvestimentoSegurancaAllTurns() as single:
+		total = 0.0F
+		for i in range(turn):
+			total += getInvestimentoSegurancaTotal(i)
+		return total
+
+	
+
+		
 

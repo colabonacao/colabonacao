@@ -10,5 +10,6 @@ class Orcamento (MonoBehaviour):
 		textbox = gameObject.GetComponent(Text)
 		city = GameObject.FindObjectOfType(City) as City
 	
-	def Update ():
-		textbox.text = "\$ $(city.getOrcamento())"
+	def LateUpdate ():
+		if city.getOrcamento() >= 0:
+			textbox.text = "\$ $(Mathf.Floor(city.getOrcamento()))"

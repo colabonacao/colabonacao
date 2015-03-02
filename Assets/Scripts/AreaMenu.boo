@@ -27,6 +27,8 @@ class AreaMenu (RegularMenu):
 	private ValueSeguranca as Text = null
 	private city as City = null
 	
+	private lastSliderSlided as Slider
+	
 	area as Area = null
 
 	override def initialize ():
@@ -118,5 +120,8 @@ class AreaMenu (RegularMenu):
 		SliderSeguranca.maxValue = city.getCaixa()
 		SliderCultura.maxValue = city.getCaixa()
 		
+	def setLastSlider(slider as Slider):
+		lastSliderSlided = slider
 		
-
+	def getLastSlider() as Slider:
+		return lastSliderSlided

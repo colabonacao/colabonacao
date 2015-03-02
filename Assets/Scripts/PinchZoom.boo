@@ -64,20 +64,18 @@ class PinchZoom (MonoBehaviour):
             // Find the difference in the distances between each frame.
 			deltaMagnitudeDiff as single = (prevTouchDeltaMag - touchDeltaMag)
 			
-			expected = (t.sizeDelta.x + deltaMagnitudeDiff * orthoZoomSpeed)
-			if (expected < maxCamSize) and (expected > minCamSize):
-				adjustpivot(deltaMagnitudeDiff * orthoZoomSpeed)
+			//expected = (t.sizeDelta.x - deltaMagnitudeDiff * orthoZoomSpeed)
+			//if (expected < maxCamSize) and (expected > minCamSize):
+				//adjustpivot(deltaMagnitudeDiff * orthoZoomSpeed)
             
             // ... change the scale size based on the change in distance between the touches.
-			t.sizeDelta.x += (deltaMagnitudeDiff * orthoZoomSpeed)
-			t.sizeDelta.y += (deltaMagnitudeDiff * orthoZoomSpeed * yproportion)
-            
+			t.sizeDelta.x -= (deltaMagnitudeDiff * orthoZoomSpeed)
+			t.sizeDelta.y -= (deltaMagnitudeDiff * orthoZoomSpeed * yproportion)
+			
             // Make sure the size never drops below min.
-			self.transform.localScale.x = Mathf.Max(self.transform.localScale.x, minCamSize)
-			self.transform.localScale.y = Mathf.Max(self.transform.localScale.y, minCamSize * yproportion)
-			self.transform.localScale.x = Mathf.Min(self.transform.localScale.x, maxCamSize)
-			self.transform.localScale.y = Mathf.Min(self.transform.localScale.y, maxCamSize * yproportion)
-
-
-
- 
+			t.sizeDelta.x = Mathf.Max(t.sizeDelta.x, minCamSize)
+			t.sizeDelta.y = Mathf.Max(t.sizeDelta.y, minCamSize * yproportion)
+			t.sizeDelta.x = Mathf.Min(t.sizeDelta.x, maxCamSize)
+			t.sizeDelta.y = Mathf.Min(t.sizeDelta.y, maxCamSize * yproportion)
+			
+			

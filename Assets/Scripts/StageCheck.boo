@@ -24,7 +24,7 @@ class StageCheck (MonoBehaviour):
 		cityObj = Instantiate(loadcity) as GameObject
 		cityObj.transform.SetParent(WhereToInsert.transform)
 		t = cityObj.transform as RectTransform
-		t.position = Vector3(0,0,0)
+		t.localPosition = Vector3(0,0,0)
 		t.sizeDelta = Vector3(0,0,0)
 		t.localScale = Vector3(1,1,1)
 		audioman = GameObject.FindObjectOfType(AudioManager) as AudioManager

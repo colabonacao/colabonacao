@@ -16,6 +16,17 @@ class EndCheck (MonoBehaviour):
 	
 	private endEnumInstance as EndEnum
 	
+	private InvestimentoAgropecuariaMod as single = 0.0F
+	private InvestimentoCulturaMod as single = 0.0F
+	private InvestimentoEducacaoMod as single = 0.0F
+	private InvestimentoEsporteMod as single = 0.0F
+	private InvestimentoInfraestruturaMod as single = 0.0F
+	private InvestimentoMeioAmbienteMod as single = 0.0F
+	private InvestimentoMobilidadeMod as single = 0.0F
+	private InvestimentoSaudeMod as single = 0.0F
+	private InvestimentoSegurancaMod as single = 0.0F
+	private InvestimentoTrabalhoMod as single = 0.0F
+	
 	def Awake ():
 		EndChosenInstance = GameObject.FindObjectOfType(EndChosen)
 		endEnumInstance = GameObject.FindObjectOfType(EndEnum)
@@ -126,6 +137,32 @@ class EndCheck (MonoBehaviour):
 		initialsuccess = false
 		partialfail = false
 		chaoticfail = false
+		
+		//modifier data is being calculated, but not used yet
+		for n as News in news.getNews():
+			if n.getModifier() != null and n.getModifier().investment != "":
+				investment = n.getModifier().investment
+				if investment == "agropecuaria":
+					InvestimentoAgropecuariaMod += n.getModifier().mod
+				if investment == "cultura":
+					InvestimentoCulturaMod += n.getModifier().mod
+				if investment == "educacao":
+					InvestimentoEducacaoMod += n.getModifier().mod
+				if investment == "esporte":
+					InvestimentoEsporteMod += n.getModifier().mod
+				if investment == "infraestrutura":
+					InvestimentoInfraestruturaMod += n.getModifier().mod
+				if investment == "meioambiente":
+					InvestimentoMeioAmbienteMod += n.getModifier().mod
+				if investment == "mobilidade":
+					InvestimentoMobilidadeMod += n.getModifier().mod
+				if investment == "saude":
+					InvestimentoSaudeMod += n.getModifier().mod
+				if investment == "seguranca":
+					InvestimentoSegurancaMod += n.getModifier().mod
+				if investment == "trabalho":
+					InvestimentoTrabalhoMod += n.getModifier().mod
+				
 					
 		x = city.getInvestimentoAgropecuariaAllTurns()/InvestmentAvailable
 		if (x < 0.45f):

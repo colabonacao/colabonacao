@@ -10,7 +10,7 @@ class NewsMenuPopulate (MonoBehaviour):
 
 	def Start ():
 		newsList = newsScroll.getNews()
-		for i in range(newsList.Count):
+		for i in range(len(newsList)):
 			newsObj = Instantiate(newsPrefab as GameObject)
 			newsObj.transform.SetParent(gameObject.transform, false)
 			newsObj.GetComponentInChildren[of NewsItem]().SetNews((newsList[i] as News).getText(), (newsList[i] as News).getSourceSprite())

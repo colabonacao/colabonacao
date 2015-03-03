@@ -2,7 +2,7 @@
 
 class MoviePlayer (MonoBehaviour): 
 	
-	public movieArray as (GameObject)
+	public movieArray as (string)
 
 	def Start ():
 		StartCoroutine(MoviePlay())
@@ -14,8 +14,7 @@ class MoviePlayer (MonoBehaviour):
 		ChangeScene('MainMenu')
 		
 	def MoviePlay () as IEnumerator:
-		Handheld.PlayFullScreenMovie ("sinapses.mp4", Color.black, FullScreenMovieControlMode.CancelOnInput, FullScreenMovieScalingMode.AspectFit);
-		yield WaitForSeconds(1)
-		Handheld.PlayFullScreenMovie ("vinheta_tg_studio.mp4", Color.black, FullScreenMovieControlMode.CancelOnInput, FullScreenMovieScalingMode.AspectFit);
-		yield WaitForSeconds(1)
+		for movie as string in movieArray:
+			Handheld.PlayFullScreenMovie (movie, Color.black, FullScreenMovieControlMode.CancelOnInput, FullScreenMovieScalingMode.AspectFit)
+			yield WaitForSeconds(1)
 		MoviesEnded()

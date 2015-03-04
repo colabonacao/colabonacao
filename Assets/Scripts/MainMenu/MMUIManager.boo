@@ -67,14 +67,14 @@ class MMUIManager (MonoBehaviour):
 		historyText.text = regionsMasks[stageChosen.stagePicked].GetComponent[of RegionDetails]().history
 		stageMenu.GetComponent[of Animator]().SetBool("slideOut", true)
 		stageDetailsMenu.GetComponent[of Animator]().SetBool("slideOut", false)
-		regionsMasks[stageChosen.stagePicked].GetComponent[of Animator]().SetBool("toFade", false)
+		regionsMasks[stageChosen.stagePicked].SetActive(true)
 		
 	def StopStageSelectDetails ():
 		menuState = 1
 		stageMenu.GetComponent[of Animator]().SetBool("slideOut", false)
 		stageDetailsMenu.GetComponent[of Animator]().SetBool("slideOut", true)
-		for region as GameObject in regionsMasks:
-			region.GetComponent[of Animator]().SetBool("toFade", true)
+		//for region as GameObject in regionsMasks:
+		regionsMasks[stageChosen.stagePicked].SetActive(false)
 		
 	def StartTutorial ():
 		if (not tutorialArea.activeSelf):

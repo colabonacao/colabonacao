@@ -17,8 +17,7 @@ class MMUIManager (MonoBehaviour):
 	
 	public stageChosen as StageChosen
 	
-	public statisticsText as Text
-	public historyText as Text
+	public stageDetailsText as Text
 		
 	private tutorialObj as GameObject
 	private creditsObj as GameObject
@@ -39,6 +38,7 @@ class MMUIManager (MonoBehaviour):
 				StartCredits()
 			else:
 				Application.Quit()
+				
 	
 	private def ChangeScene (sceneName as string):
 		AutoFade.LoadLevel(sceneName, 0.2f, 0.1f, Color.black)
@@ -63,17 +63,15 @@ class MMUIManager (MonoBehaviour):
 		
 	def StartStageSelectDetails ():
 		menuState = 2
-		statisticsText.text = regionsMasks[stageChosen.stagePicked].GetComponent[of RegionDetails]().statistics
-		historyText.text = regionsMasks[stageChosen.stagePicked].GetComponent[of RegionDetails]().history
+		regionsMasks[stageChosen.stagePicked].SetActive(true)
+		stageDetailsText.text = regionsMasks[stageChosen.stagePicked].GetComponent[of RegionDetails]().GetDetails()
 		stageMenu.GetComponent[of Animator]().SetBool("slideOut", true)
 		stageDetailsMenu.GetComponent[of Animator]().SetBool("slideOut", false)
-		regionsMasks[stageChosen.stagePicked].SetActive(true)
 		
 	def StopStageSelectDetails ():
 		menuState = 1
 		stageMenu.GetComponent[of Animator]().SetBool("slideOut", false)
 		stageDetailsMenu.GetComponent[of Animator]().SetBool("slideOut", true)
-		//for region as GameObject in regionsMasks:
 		regionsMasks[stageChosen.stagePicked].SetActive(false)
 		
 	def StartTutorial ():

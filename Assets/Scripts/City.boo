@@ -45,7 +45,7 @@ class City (MonoBehaviour):
 		
 	def newTurn():
 		turn++
-		if turn >= maxturns:
+		if turn >= getMaxTurns():
 			gotoending = false
 			(GameObject.FindObjectOfType(EndChosen) as EndChosen).setEnding()
 			return
@@ -58,6 +58,9 @@ class City (MonoBehaviour):
 		
 	def getTurn():
 		return turn
+		
+	def getMaxTurns():
+		return maxturns
 		
 	def getCaixaAtTurn(turnnum as int):
 		if (turnnum < 0):

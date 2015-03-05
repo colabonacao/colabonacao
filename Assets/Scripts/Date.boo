@@ -5,8 +5,9 @@ import City
 class Date (MonoBehaviour): 
 	private textbox as Text
 	private dt as System.DateTime
-	private timeelapsed as single
+	private timeelapsed as single = 0.0F
 	private city as City
+	private paused = false
 
 	def Start ():
 		textbox = gameObject.GetComponent(Text)
@@ -14,7 +15,8 @@ class Date (MonoBehaviour):
 		city = GameObject.FindObjectOfType(City) as City
 	
 	def Update ():
-		timeelapsed = timeelapsed + Time.deltaTime
+		if not paused:
+			timeelapsed = timeelapsed + Time.deltaTime
 		daystoadd = Mathf.Floor(timeelapsed / 1.6)
 		monthstoadd = (city.getTurn()) * 6
 		//if time is up
@@ -24,6 +26,12 @@ class Date (MonoBehaviour):
 			daystoadd = Mathf.Floor(timeelapsed / 1.6)
 
 		textbox.text = string.Format("{0:dd/MM/yyyy}", dt.AddDays(daystoadd).AddMonths(monthstoadd))
+		
+	def setPaused(toset):
+		paused = toset
+
+	def reset():
+		timeelapsed = 0.0F
 		
 		
 

@@ -27,7 +27,7 @@ class Date (MonoBehaviour):
 
 		textbox.text = string.Format("{0:dd/MM/yyyy}", dt.AddDays(daystoadd).AddMonths(monthstoadd))
 		
-	def setPaused(toset):
+	def setPaused(toset as bool):
 		paused = toset
 
 	def reset():

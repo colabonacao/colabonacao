@@ -8,7 +8,7 @@ class Area (MonoBehaviour):
 	private selectable = true
 	private areaimage as Image = null 
 
-	private players = []
+	private turns = []
 	
 	def Start ():
 		areaimage = gameObject.GetComponent[of Image]() as Image
@@ -33,7 +33,7 @@ class Area (MonoBehaviour):
 			if areaimage != null:
 				areaimage.color = Color(0,0,0,0.6f)
 		else:
-			if players.Count > 0 and isinvested():
+			if turns.Count > 0 and isinvested():
 			   	if areaimage != null:
 			   		areaimage.color = Color(0.2,0.6,0.2,0.2)
 			else:
@@ -59,18 +59,18 @@ class Area (MonoBehaviour):
 			   getInvestimentoSeguranca() > 0 or\
 			   getInvestimentoAgropecuaria() > 0
 	
-	public def AddPlayers(toset):
-		players.Add(toset)
+	public def AddTurn(toset as (Player)):
+		turns.Add(toset)
 		
 	public def getPlayer(playernum as int,turnnum as int) as Player:
 		if turnnum < 0:
-			turnnum = players.Count + turnnum
+			turnnum = len(turns) + turnnum
 		if playernum < 0:
-			playernum = len(players[turnnum] as (Player)) + playernum
-		return (players[turnnum] as (Player))[playernum] as Player
+			playernum = len(turns[turnnum] as (Player)) + playernum
+		return (turns[turnnum] as (Player))[playernum] as Player
 		
 	public def getPreviousTurnPlayer(playernum) as Player:
-		if players.Count > 1:
+		if turns.Count > 1:
 			return getPlayer(playernum,-2)
 		else:
 			return null

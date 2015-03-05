@@ -121,7 +121,7 @@ class City (MonoBehaviour):
 				playerlist[p].InvestimentoSaude = (playervals[p-1] as (single))[7+a*10]
 				playerlist[p].InvestimentoTrabalho = (playervals[p-1] as (single))[8+a*10]
 				playerlist[p].InvestimentoSeguranca = (playervals[p-1] as (single))[9+a*10]
-			areas[a].AddPlayers(playerlist)
+			areas[a].AddTurn(playerlist)
 			
 	public def getInvestimentoCulturaPlayer(playernum,turnnum as int) as single:
 		total = 0.0F

@@ -19,9 +19,9 @@ class SliderDragStop (MonoBehaviour):
 		budget = city.getOrcamento()
 		if budget < 0:
 			if (areaMenu.getLastSlider().name == self.name):
-				Debug.Log(slider.value)
+				//Debug.Log(slider.value)
 				slider.value += budget
-				Debug.Log(slider.value)
+				//Debug.Log(slider.value)
 		
 	def SetPotentialDrag():
 		if areaMenu is null:

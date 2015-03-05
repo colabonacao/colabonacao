@@ -6,6 +6,8 @@ class EndTurnPopup (RegularPopup):
 	private selections = ["Resumo Geral","Você","Jogador 2","Jogador 3","Jogador 4","Jogador 5","Jogador 6","Jogador 7","Jogador 8"]
 	public piechart as PieChartMeshController 
 	public chartName as Text
+	public ContinueButtonText as Text
+	public timer as Date
 	private city as City = null
 
 	override def initialize():
@@ -51,10 +53,18 @@ class EndTurnPopup (RegularPopup):
 		
 	override def dismiss():
 		super()
+		timer.setPaused(false)
+		timer.reset()
 		city.newTurn()
 		
 	override def invoke():
 		super()
 		ShowStats(0)
-	
+		timer.setPaused(true)
+		if (city.getTurn()+1) == city.getMaxTurns()-1:
+			ContinueButtonText.text = "Último Turno"
+		elif (city.getTurn()+1) >= city.getMaxTurns():
+			ContinueButtonText.text = "Fim de Jogo"
+		else:
+			ContinueButtonText.text = "Ir para turno $(city.getTurn()+2)"
 	

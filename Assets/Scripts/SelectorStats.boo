@@ -11,7 +11,7 @@ class SelectorStats (MonoBehaviour):
 	public piechart as PieChartMeshController
 	private city as City = null
 	
-	def Start ():
+	def Initialize ():
 		textbox = gameObject.GetComponentInChildren[of Text]()
 		city = GameObject.FindObjectOfType(City) as City
 	
@@ -19,22 +19,22 @@ class SelectorStats (MonoBehaviour):
 		pass
 		
 	def nextselection():
-		if city == null:
-			city = GameObject.FindObjectOfType(City) as City
 		index = (index + 1) % len(selections)
-		textbox.text = selections[index]
-		if (index >= 1):
-			setPieChartValues(index-1)
-		else:
-			setPieChartGeneral()
+		setSelection(index)
 			
 	def previousselection():
-		if city == null:
-			city = GameObject.FindObjectOfType(City) as City
 		index = ((index - 1) < 0) and (len(selections)-1) or (index-1)
-		textbox.text = selections[index]
+		setSelection(index)
+
+	def setSelection(toset as int):
+		if city == null:
+			Initialize()
+		if city.getTurn() < 1:
+			return
+		index = toset
+		textbox.text = selections[toset]
 		if (index >= 1):
-			setPieChartValues(index -1)
+			setPieChartValues(toset -1)
 		else:
 			setPieChartGeneral()
 		

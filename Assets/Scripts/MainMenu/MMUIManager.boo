@@ -53,7 +53,7 @@ class MMUIManager (MonoBehaviour):
 		menuState = 1
 		mainMenu.GetComponent[of Animator]().SetBool("slideOut", true)
 		stageMenu.GetComponent[of Animator]().SetBool("slideOut", false)
-		blackBackground.GetComponent[of Animator]().SetBool("toFade", true)
+		//blackBackground.GetComponent[of Animator]().SetBool("toFade", true)
 		
 	def StopStageSelect ():
 		menuState = 0

@@ -108,17 +108,19 @@ class AreaMenu (RegularMenu):
 		SliderTrabalho.value = area.getInvestimentoTrabalho()
 		SliderSeguranca.value = area.getInvestimentoSeguranca()
 		SliderCultura.value = area.getInvestimentoCultura()
+		
+		sliderMaxOffset = 8.0f
 
-		SliderEducacao.maxValue = city.getCaixa()
-		SliderEsporte.maxValue = city.getCaixa()
-		SliderInfraestrutura.maxValue = city.getCaixa()
-		SliderMeioambiente.maxValue = city.getCaixa()
-		SliderMobilidade.maxValue = city.getCaixa()
-		SliderAgropecuaria.maxValue = city.getCaixa()
-		SliderSaude.maxValue = city.getCaixa()
-		SliderTrabalho.maxValue = city.getCaixa()
-		SliderSeguranca.maxValue = city.getCaixa()
-		SliderCultura.maxValue = city.getCaixa()
+		SliderEducacao.maxValue = city.getCaixa()/sliderMaxOffset
+		SliderEsporte.maxValue = city.getCaixa()/sliderMaxOffset
+		SliderInfraestrutura.maxValue = city.getCaixa()/sliderMaxOffset
+		SliderMeioambiente.maxValue = city.getCaixa()/sliderMaxOffset
+		SliderMobilidade.maxValue = city.getCaixa()/sliderMaxOffset
+		SliderAgropecuaria.maxValue = city.getCaixa()/sliderMaxOffset
+		SliderSaude.maxValue = city.getCaixa()/sliderMaxOffset
+		SliderTrabalho.maxValue = city.getCaixa()/sliderMaxOffset
+		SliderSeguranca.maxValue = city.getCaixa()/sliderMaxOffset
+		SliderCultura.maxValue = city.getCaixa()/sliderMaxOffset
 		
 	def setLastSlider(slider as Slider):
 		lastSliderSlided = slider

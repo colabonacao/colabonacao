@@ -6,7 +6,8 @@ class NewsItem (MonoBehaviour):
 	public newsLogo as Image
 	
 	def Awake():
-		newsText.fontSize = (newsText.fontSize * Screen.width/800)
+		sizeScaleFactor = Mathf.Min(Screen.width/800.0f, Screen.height/600.0f)
+		newsText.fontSize = (newsText.fontSize * sizeScaleFactor)
 
 	def SetNews(description as string, logo as Sprite):
 		newsText.text = description

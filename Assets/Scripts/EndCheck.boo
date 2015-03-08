@@ -3,7 +3,6 @@
 class EndCheck (MonoBehaviour): 
 
 	private city as City
-	private news as NewsScroll
 	public stagePicked as StageEnum.Stages = StageEnum.Stages.Brasilia
 	public statsPie as GameObject = null
 	public stageChosen as StageChosen = null
@@ -33,10 +32,8 @@ class EndCheck (MonoBehaviour):
 		
 		if EndChosenInstance is not null:
 			city = EndChosenInstance.getCity()
-			news = EndChosenInstance.getNews()
 			stagePicked = EndChosenInstance.getStagePicked()
 			city.transform.SetParent(gameObject.transform, false)
-			news.transform.SetParent(gameObject.transform, false)
 			Destroy(EndChosenInstance.gameObject)
 			
 		if stageChosen is not null:
@@ -139,6 +136,7 @@ class EndCheck (MonoBehaviour):
 		chaoticfail = false
 		
 		//modifier data is being calculated, but not used yet
+		/*
 		for n as News in news.getNews():
 			if n.getModifier() != null and n.getModifier().investment != "":
 				investment = n.getModifier().investment
@@ -162,7 +160,7 @@ class EndCheck (MonoBehaviour):
 					InvestimentoSegurancaMod += n.getModifier().mod
 				if investment == "trabalho":
 					InvestimentoTrabalhoMod += n.getModifier().mod
-				
+		*/
 					
 		x = city.getInvestimentoAgropecuariaAllTurns()/InvestmentAvailable
 		if (x < 0.45f):

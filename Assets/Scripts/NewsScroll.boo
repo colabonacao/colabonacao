@@ -7,9 +7,9 @@ public class NewsScroll (MonoBehaviour):
 	textbox as Text = null
 	parent as Image = null
 	initx = 0
+	public newsmenu as NewsMenuPopulate
 
-	def Start ():
-		randomnews as (News) = (
+	randomnews as (News) = (
 News("Colabonews","O Imposto sobre Partipação Política foi revogado. Todos os produtos devem ficar mais baratos.",Modifier("all",12,8)),
 News("Colabonews","Prefeitura aumenta a fiscalização contra agrotóxicos usados irregularmente",Modifier("agropecuaria",5,1)),
 News("Colabonews","Prefeitura vai ajudar na reconstrução de usina elétrica que explodiu há dois dias.",Modifier("infraestrutura",5,1)),
@@ -130,21 +130,8 @@ News("Diário do País","Ator de hollywood é preso ao participar de protestos v
 News("Nação em Foco","Manifestação de estudantes no Canadá exige maior participação na política do país",Modifier()),
 News("Diário do País","Onda de protestos pelo mundo se diz inspirada pelo exemplo brasileiro",Modifier()),
 		)
-		
-		nums = []
-		
-		//get 3 news at random
-		for i in range(3):
-			num = Random.Range(0,len(randomnews))
-			while num in nums:
-				num = Random.Range(0,len(randomnews))
-			nums.Push(num)
-		for i in nums:
-			news.Push(randomnews[i])
-
-		textbox = gameObject.GetComponentInChildren[of Text]()
-		textbox.text = [(n as News).getText() for n in news].Join("                                                               ")
-		initx = transform.position.x
+	def Start ():
+		fetchRandomNews()
 	
 	def Update ():
 		if (transform.position.x + Camera.mainCamera.ScreenToWorldPoint(Vector3(textbox.preferredWidth+Screen.width/1.4,0,0)).x < 0):
@@ -154,7 +141,35 @@ News("Diário do País","Onda de protestos pelo mundo se diz inspirada pelo exem
 		
 	def getNews() as List:
 		return news
+		
+	def fetchRandomNews():
+		oldnews = news
+		news = []
+		//keep the ones with modifiers
+		for n as News in oldnews:
+			if n.getModifier() != null:
+				n.getModifier().duration--
+				if n.getModifier().duration > 0:
+					news.Push(n)
+		
+		nums = []
+		//get 12 news at random
+		for i in range(12):
+			num = Random.Range(0,len(randomnews))
+			while num in nums:
+				num = Random.Range(0,len(randomnews))
+			nums.Push(num)
+		for i in nums:
+			if randomnews[i] != null:
+				news.Push(randomnews[i])
+				randomnews[i] = null
+			
+		textbox = gameObject.GetComponentInChildren[of Text]()
+		textbox.text = [(n as News).getText() for n in news].Join("                                                               ")
+		initx = transform.position.x
 
+		newsmenu.Populate()
+		
 public class News():
 	source as string
 	text as string

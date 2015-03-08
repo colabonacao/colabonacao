@@ -5,7 +5,7 @@ class PinchZoom (MonoBehaviour):
 	private minCamSize as single = 1.0F
 	private maxCamSize as single = 10.0F
 	private perspectiveZoomSpeed as single = 0.5F
-	public orthoZoomSpeed as single = 100F
+	public orthoZoomSpeed as single = 50F
 	private t as RectTransform
 	yproportion = 1F
 	private parentscrollview as ScrollRect

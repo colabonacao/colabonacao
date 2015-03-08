@@ -26,6 +26,10 @@ class RegularMenu (MonoBehaviour):
 		areas = GameObject.FindObjectsOfType(Area) as (Area)
 		for area in areas:
 			area.setSelectable(false)
+		scrollable = gameObject.GetComponentInChildren[of VerticalScrollableAutoScale]() as Component
+		if scrollable != null:
+			t = (scrollable.gameObject.transform as RectTransform)
+			t.anchoredPosition.y = 0
 			
 	public def dismiss():
 		//AnimatedPanel.SetBool("slideOut",true) 
@@ -39,5 +43,6 @@ class RegularMenu (MonoBehaviour):
 		initialized = true
 		dismiss()
 		
+   
 		
 		

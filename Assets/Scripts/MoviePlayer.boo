@@ -30,4 +30,5 @@ class MoviePlayer (MonoBehaviour):
 					yield WaitForSeconds(0.1f)
 					currentTime = Time.timeSinceLevelLoad + timeDifference; // if we are not paused then this should be close to the real time
 					break unless (waitTime < 2.0f)
+			yield WaitForSeconds(1.0f)
 		MoviesEnded()

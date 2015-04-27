@@ -51,6 +51,7 @@ class AreaMenu (RegularMenu):
 		pass
 		
 	public def invoke(areatocontrol as Area):
+		
 		invoke()
 		area = areatocontrol
 		configAreaValues()

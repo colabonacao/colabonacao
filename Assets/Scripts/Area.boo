@@ -7,6 +7,7 @@ class Area (MonoBehaviour):
 	private selected = false
 	private selectable = true
 	private areaimage as Image = null 
+	public tempCounter = 0.0F
 
 	private turns = []
 	
@@ -15,7 +16,6 @@ class Area (MonoBehaviour):
 		areaimage.color = Color(0,0,0,0)
 		(gameObject.GetComponent[of Button]() as Button).onClick.AddListener(OnClick)
 		menu = (GameObject.FindObjectsOfTypeAll(AreaMenu) as (AreaMenu))[0]
-	
 	def Update ():
 		pass
 			

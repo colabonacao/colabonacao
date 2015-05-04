@@ -28,6 +28,7 @@ class City (MonoBehaviour):
 	def getOrcamento() as single:
 		gasto = 0
 		for a in areas:
+			building = a.FindObjectOfType(Building)
 			gasto += a.getInvestimentoCultura()
 			gasto += a.getInvestimentoEducacao()
 			gasto += a.getInvestimentoEsporte()
@@ -38,6 +39,7 @@ class City (MonoBehaviour):
 			gasto += a.getInvestimentoSaude()
 			gasto += a.getInvestimentoTrabalho()
 			gasto += a.getInvestimentoSeguranca()
+			a.tempCounter = gasto
 		return caixa - gasto
 		
 	public def getCaixa() as single:

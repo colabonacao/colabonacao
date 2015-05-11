@@ -10,8 +10,10 @@ class City (MonoBehaviour):
 	private areas as (Area)
 	private city as City
 	private gotoending = false
-
+		
 	def Start ():
+		conexao = MySQLAccess("127.0.0.1", "condominio", "colabonacao", "")
+		conexao.OpenConnection()
 		areas = GameObject.FindObjectsOfType(Area)
 		t = turn/2
 		caixa = orcamento[t]/2
@@ -57,6 +59,7 @@ class City (MonoBehaviour):
 		(GameObject.FindObjectOfType(ButtonHistorico) as ButtonHistorico).activate()
 		for a in areas:
 			a.setSelected(false)
+			((a).gameObject.GetComponentInChildren[of Building]() as Building).CheckUpdates()
 		
 	def getTurn():
 		return turn
@@ -85,7 +88,7 @@ class City (MonoBehaviour):
 		for i in range(length):
 			targets[i] = Random.Range(start, end)
 		return targets
- 		
+  	
 	def generateRandomPlayers():
 		playervals = []
 		for i in range(7):
@@ -339,8 +342,4 @@ class City (MonoBehaviour):
 		for i in range(turn):
 			total += getInvestimentoDisponivelTotal(i)
 		return total
-
-	
-
-		
 

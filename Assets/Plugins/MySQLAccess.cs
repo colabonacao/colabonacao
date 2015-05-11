@@ -6,10 +6,10 @@ using System;
 public class MySQLAccess : MonoBehaviour {
 	private MySqlConnection connection = new MySqlConnection ();
 	private MySqlDataReader rdr;
-	private string server;
-	private string database;
-	private string uid;
-	private string password;
+	private string server = "127.0.0.1";
+	private string database = "condominio";
+	private string uid = "colabonacao";
+	private string password = "colab123";
 
 	public MySQLAccess(string host, string db, string user, string psw)
 	{
@@ -22,19 +22,14 @@ public class MySQLAccess : MonoBehaviour {
 
 	private void Initialize(string host, string db, string user, string psw)
 	{
-		
 		server = host;
 		database = db;
 		uid = user;
 		password = psw;
 		string connectionString;
 		connectionString = "server=" + server + ";" + "database=" +
-			database + ";" + "user=" + uid + ";" + "password=" + password + ";";
-		
+			database + ";" + "user=" + uid + ";";
 		connection = new MySqlConnection(connectionString);
-		
-		
-		
 	}
 
 	//open connection to database
@@ -43,6 +38,7 @@ public class MySQLAccess : MonoBehaviour {
 		try
 		{
 			connection.Open();
+			Debug.Log("Conectado!");
 			return true;
 		}
 		catch (Exception ex)

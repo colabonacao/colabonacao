@@ -13,11 +13,11 @@ class Building (MonoBehaviour):
 		city = area.gameObject.GetComponentInParent[of City]() as City
 		
 		if(city.name == "São Paulo"):
-			buildImage.sprite = imagens[5]
+			buildImage.sprite = imagens[9]
 		if(city.name == "Recife"):
-			buildImage.sprite = imagens[5]
+			buildImage.sprite = imagens[9]
 		if(city.name == "Rio de Janeiro"):
-			buildImage.sprite = imagens[5]
+			buildImage.sprite = imagens[9]
 		
 		for i in range(0, imagens.Length):
 			if(buildImage.sprite == imagens[i]):

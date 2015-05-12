@@ -27,8 +27,8 @@ class Building (MonoBehaviour):
 		pass
 			
 	def CheckUpdates ():	
-		if(area.getInvestimentoCultura() + area.getInvestimentoEducacao() + area.getInvestimentoEsporte() + area.getInvestimentoInfraestrutura() + area.getInvestimentoMeioAmbiente() + area.getInvestimentoMobilidade() + area.getInvestimentoAgropecuaria() + area.getInvestimentoSaude() + area.getInvestimentoTrabalho() + area.getInvestimentoSeguranca() > 0):
-			novoNivelInvestimento = nivelInvestimento + 1
+		if(area.getInvestimentoCultura() + area.getInvestimentoEducacao() + area.getInvestimentoEsporte() + area.getInvestimentoInfraestrutura() + area.getInvestimentoMeioAmbiente() + area.getInvestimentoMobilidade() + area.getInvestimentoAgropecuaria() + area.getInvestimentoSaude() + area.getInvestimentoTrabalho() + area.getInvestimentoSeguranca() == 0):
+			novoNivelInvestimento = nivelInvestimento - 1
 		if novoNivelInvestimento != nivelInvestimento:
 			buildImage.sprite = imagens[novoNivelInvestimento]
 			nivelInvestimento = novoNivelInvestimento

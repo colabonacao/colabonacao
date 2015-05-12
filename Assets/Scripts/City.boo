@@ -12,8 +12,8 @@ class City (MonoBehaviour):
 	private gotoending = false
 		
 	def Start ():
-		conexao = MySQLAccess("127.0.0.1", "condominio", "colabonacao", "")
-		conexao.OpenConnection()
+//		conexao = MySQLAccess("127.0.0.1", "condominio", "colabonacao", "")
+//		conexao.OpenConnection()
 		areas = GameObject.FindObjectsOfType(Area)
 		t = turn/2
 		caixa = orcamento[t]/2

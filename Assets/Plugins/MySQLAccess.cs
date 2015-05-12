@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
 using System;
 
 public class MySQLAccess : MonoBehaviour {
-	private MySqlConnection connection = new MySqlConnection ();
+	/*private MySqlConnection connection = new MySqlConnection ();
 	private MySqlDataReader rdr;
 	private string server = "127.0.0.1";
 	private string database = "condominio";
@@ -73,5 +73,5 @@ public class MySQLAccess : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-	}
+	}*/
 }

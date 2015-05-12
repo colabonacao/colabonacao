@@ -8,6 +8,9 @@ class MMUIManager (MonoBehaviour):
 	public creditsArea as GameObject
 	public creditsPrefab as GameObject
 	
+	public medalArea as GameObject
+	public medalsPrefab as GameObject
+	
 	public blackBackground as GameObject
 	public mainMenu as GameObject
 	public stageMenu as GameObject
@@ -21,8 +24,24 @@ class MMUIManager (MonoBehaviour):
 		
 	private tutorialObj as GameObject
 	private creditsObj as GameObject
+	private medalsObj as GameObject
 	
 	private menuState as int = 0
+	
+	def Start() as void:
+		if(not PlayerPrefs.HasKey("Aracaju")):
+			PlayerPrefs.SetInt("Aracaju", 0)
+			PlayerPrefs.SetInt("Belém", 0)
+			PlayerPrefs.SetInt("Belo Horizonte", 0)
+			PlayerPrefs.SetInt("Brasília", 0)
+			PlayerPrefs.SetInt("Maceió", 0)
+			PlayerPrefs.SetInt("Porto Alegre", 0)
+			PlayerPrefs.SetInt("Recife", 0)
+			PlayerPrefs.SetInt("Rio de Janeiro", 0)
+			PlayerPrefs.SetInt("São Paulo", 0)
+
+		creditsArea.SetActive(false)
+		medalArea.SetActive(false)
 	
 	def Update() as void:
 		if (Input.GetKeyDown(KeyCode.Escape)):
@@ -97,4 +116,17 @@ class MMUIManager (MonoBehaviour):
 			menuState = 0
 			creditsArea.SetActive(false)
 			Destroy(creditsObj)
+	
+	def StartMedals ():
+		if (not medalArea.activeSelf):
+			menuState = 11
+			medalsObj = Instantiate(medalsPrefab as GameObject)
+			medalsObj.transform.SetParent(medalArea.transform, false)
+			medalArea.SetActive(true)
+			closeButton = medalArea.FindObjectOfType(Button)
+			closeButton.onClick.AddListener({StartMedals()})
+		else:
+			menuState = 0
+			medalArea.SetActive(false)
+			Destroy(medalsObj)
 	

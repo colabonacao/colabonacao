@@ -302,23 +302,27 @@ class EndCheck (MonoBehaviour):
 				
 		if not (partialsuccess or partialfail or chaoticfail):
 			initialsuccess = true
-		
 		if absolutesuccess:
+			PlayerPrefs.SetInt(city.name, 2)
 			endingAnim[0].SetActive(true)
 			resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.SuccessComplete]
 			audioManager.PlayMusic(endingAnim[0].GetComponent[of AnimMusic]().musicName)
 		elif partialsuccess:
+			PlayerPrefs.SetInt(city.name, 1)
 			endingAnim[1].SetActive(true)
 			resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.SuccessModerate]
 			audioManager.PlayMusic(endingAnim[1].GetComponent[of AnimMusic]().musicName)
 		elif initialsuccess:
+			PlayerPrefs.SetInt(city.name, 0)
 			endingAnim[2].SetActive(true)
 			resultsText = resultsText + endEnumInstance.endingsText[endEnumInstance.Endings.SuccessSmall]
 			audioManager.PlayMusic(endingAnim[2].GetComponent[of AnimMusic]().musicName)
 		elif partialfail:
+			PlayerPrefs.SetInt(city.name, 0)
 			endingAnim[3].SetActive(true)
 			audioManager.PlayMusic(endingAnim[3].GetComponent[of AnimMusic]().musicName)
 		elif chaoticfail:
+			PlayerPrefs.SetInt(city.name, 0)
 			endingAnim[4].SetActive(true)
 			audioManager.PlayMusic(endingAnim[4].GetComponent[of AnimMusic]().musicName)
 			

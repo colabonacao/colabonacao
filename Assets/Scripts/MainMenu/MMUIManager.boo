@@ -42,6 +42,7 @@ class MMUIManager (MonoBehaviour):
 
 		creditsArea.SetActive(false)
 		medalArea.SetActive(false)
+		tutorialArea.SetActive(false)
 	
 	def Update() as void:
 		if (Input.GetKeyDown(KeyCode.Escape)):

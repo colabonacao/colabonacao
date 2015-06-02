@@ -36,7 +36,7 @@ class MMUIManager (MonoBehaviour):
 	
 	def Start() as void:
 		if(not PlayerPrefs.HasKey("Aracaju")):
-			PlayerPrefs.SetInt("Aracaju", 0)
+			PlayerPrefs.SetInt("Aracaju", 1)
 			PlayerPrefs.SetInt("Belém", 0)
 			PlayerPrefs.SetInt("Belo Horizonte", 0)
 			PlayerPrefs.SetInt("Brasília", 0)

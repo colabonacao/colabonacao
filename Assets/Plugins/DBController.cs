@@ -43,7 +43,7 @@ public class DBController : MonoBehaviour
 	public IEnumerator GetScores(string cidade)
 	{
 		WWW hs_get = new WWW(highscoreURL + "cidade=" + WWW.EscapeURL(cidade));
-		Debug.Log (hs_get.url);
+		//Debug.Log (hs_get.url);
 		yield return hs_get;
 		
 		if (hs_get.error != null)
@@ -53,6 +53,18 @@ public class DBController : MonoBehaviour
 		else
 		{
 			Debug.Log(hs_get.text);
+			Dictionary<string, string> json = new Dictionary<string, string>();
+			//string a = "{\"jogadaID\": \"123\", \"cidade\": \"Palmas\", \"populacao\": \"1000000\"};";
+			char[] splitChar = {','};
+			string[] teste = null;
+			teste = hs_get.text.Replace("{","").Replace("}","").Split(splitChar, System.StringSplitOptions.None);
+			for(int i = 0; i < teste.Length; i++)
+			{
+				string[] dados = teste[i].Split(':');
+				if(!json.ContainsKey(dados[0]))
+					json.Add(dados[0], dados[1]);
+				Debug.Log(json[dados[0]]);
+			}
 			//gameObject.guiText.text = hs_get.text; // this is a GUIText that will display the scores in game.
 		}
 	}

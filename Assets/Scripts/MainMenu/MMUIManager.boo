@@ -28,6 +28,12 @@ class MMUIManager (MonoBehaviour):
 	
 	private menuState as int = 0
 	
+	private citynames = ["Manaus","Rio Branco","Maceió","Macapá","Salvador","Brasília",
+	"Fortaleza","Vitória","Goiânia","São Luis","Cuiabá","Campo Grande","Belo Horizonte","Belém",
+	"João Pessoa","Curitiba","Recife","Terezina","Rio de Janeiro","Natal","Porto Alegre","Porto Velho",
+	"Boa Vista","Florianópolis","São Paulo","Aracaju","Palmas"]
+	public stagePicked as StageEnum.Stages = StageEnum.Stages.Brasilia
+	
 	def Start() as void:
 		if(not PlayerPrefs.HasKey("Aracaju")):
 			PlayerPrefs.SetInt("Aracaju", 0)
@@ -65,8 +71,10 @@ class MMUIManager (MonoBehaviour):
 		PlayerPrefs.Save()
 		
 	def StartGame ():
+		//newGame = DBController("Belzonte2", "Intermediario")
+		//StartCoroutine(newGame.GetScores(citynames[stageChosen.stagePicked]))
 		ChangeScene('Main Game')
-		
+	
 	def StartStageSelect ():
 		if (tutorialArea.activeSelf):
 			StartTutorial()

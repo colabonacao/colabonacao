@@ -10,11 +10,19 @@ class City (MonoBehaviour):
 	private areas as (Area)
 	private city as City
 	private gotoending = false
-		
+	
+	private citynames = ["Manaus","Rio Branco","Maceió","Macapá","Salvador","Brasília",
+	"Fortaleza","Vitória","Goiânia","São Luis","Cuiabá","Campo Grande","Belo Horizonte","Belém",
+	"João Pessoa","Curitiba","Recife","Terezina","Rio de Janeiro","Natal","Porto Alegre","Porto Velho",
+	"Boa Vista","Florianópolis","São Paulo","Aracaju","Palmas"]
+	public stagePicked as StageEnum.Stages = StageEnum.Stages.Brasilia
+	public stageChosen as StageCheck
+	
 	def Start ():
-//		conexao = MySQLAccess("127.0.0.1", "condominio", "colabonacao", "")
-//		conexao.OpenConnection()
+		//conexao = MySQLAccess("colabonacao.mysql.uhserver.com", "colabonacao", "colabonacao", "Y4yHd8FjwM2PKgO!")
+		//conexao.OpenConnection()
 		areas = GameObject.FindObjectsOfType(Area)
+		stageChosen = FindObjectOfType(StageCheck)
 		t = turn/2
 		caixa = orcamento[t]/2
 		generateRandomPlayers()
@@ -90,43 +98,85 @@ class City (MonoBehaviour):
 		return targets
   	
 	def generateRandomPlayers():
-		playervals = []
-		for i in range(7):
-			randomnums = GenerateRandomValues(0,caixa,len(areas)*10)
-			sum as single = 0.0F
-			for j in range(len(areas)*10):
-				sum += randomnums[j]
-			factor = (caixa/sum)*0.50 // bots invest 50% less
-			for j in randomnums:
-				j = j*factor
-			playervals.Add(randomnums)
+		if not (Application.internetReachability == NetworkReachability.NotReachable):
+			newGame = DBController("Belo Horizonte", "Intermediario")
+			playervals = []
+			selecterPlayers = []
+			for i in range(7):
+				StartCoroutine(newGame.GetScores(citynames[stageChosen.stagePicked]))
+				randomnums = GenerateRandomValues(0,caixa,len(areas)*10)
+				sum as single = 0.0F
+				for j in range(len(areas)*10):
+					sum += randomnums[j]
+				factor = (caixa/sum)*0.50 // bots invest 50% less
+				for j in randomnums:
+					j = j*factor
+				playervals.Add(randomnums)
 
-		for a in range(len(areas)):
-			playerlist = array(Player,8)
-			playerlist[0] = Player()
-			playerlist[0].InvestimentoCultura = 0
-			playerlist[0].InvestimentoEducacao = 0
-			playerlist[0].InvestimentoEsporte = 0
-			playerlist[0].InvestimentoInfraestrutura = 0
-			playerlist[0].InvestimentoMeioAmbiente = 0
-			playerlist[0].InvestimentoMobilidade = 0
-			playerlist[0].InvestimentoAgropecuaria = 0
-			playerlist[0].InvestimentoSaude = 0
-			playerlist[0].InvestimentoTrabalho = 0
-			playerlist[0].InvestimentoSeguranca = 0
-			for p in range(1,8):
-				playerlist[p] = Player()
-				playerlist[p].InvestimentoCultura = (playervals[p-1] as (single))[0+a*10]
-				playerlist[p].InvestimentoEducacao = (playervals[p-1] as (single))[1+a*10]
-				playerlist[p].InvestimentoEsporte = (playervals[p-1] as (single))[2+a*10]
-				playerlist[p].InvestimentoInfraestrutura = (playervals[p-1] as (single))[3+a*10]
-				playerlist[p].InvestimentoMeioAmbiente = (playervals[p-1] as (single))[4+a*10]
-				playerlist[p].InvestimentoMobilidade = (playervals[p-1] as (single))[5+a*10]
-				playerlist[p].InvestimentoAgropecuaria = (playervals[p-1] as (single))[6+a*10]
-				playerlist[p].InvestimentoSaude = (playervals[p-1] as (single))[7+a*10]
-				playerlist[p].InvestimentoTrabalho = (playervals[p-1] as (single))[8+a*10]
-				playerlist[p].InvestimentoSeguranca = (playervals[p-1] as (single))[9+a*10]
-			areas[a].AddTurn(playerlist)
+			for a in range(len(areas)):
+				playerlist = array(Player,8)
+				playerlist[0] = Player()
+				playerlist[0].InvestimentoCultura = 0
+				playerlist[0].InvestimentoEducacao = 0
+				playerlist[0].InvestimentoEsporte = 0
+				playerlist[0].InvestimentoInfraestrutura = 0
+				playerlist[0].InvestimentoMeioAmbiente = 0
+				playerlist[0].InvestimentoMobilidade = 0
+				playerlist[0].InvestimentoAgropecuaria = 0
+				playerlist[0].InvestimentoSaude = 0
+				playerlist[0].InvestimentoTrabalho = 0
+				playerlist[0].InvestimentoSeguranca = 0
+				for p in range(1,8):
+					playerlist[p] = Player()
+					playerlist[p].InvestimentoCultura = (playervals[p-1] as (single))[0+a*10]
+					playerlist[p].InvestimentoEducacao = (playervals[p-1] as (single))[1+a*10]
+					playerlist[p].InvestimentoEsporte = (playervals[p-1] as (single))[2+a*10]
+					playerlist[p].InvestimentoInfraestrutura = (playervals[p-1] as (single))[3+a*10]
+					playerlist[p].InvestimentoMeioAmbiente = (playervals[p-1] as (single))[4+a*10]
+					playerlist[p].InvestimentoMobilidade = (playervals[p-1] as (single))[5+a*10]
+					playerlist[p].InvestimentoAgropecuaria = (playervals[p-1] as (single))[6+a*10]
+					playerlist[p].InvestimentoSaude = (playervals[p-1] as (single))[7+a*10]
+					playerlist[p].InvestimentoTrabalho = (playervals[p-1] as (single))[8+a*10]
+					playerlist[p].InvestimentoSeguranca = (playervals[p-1] as (single))[9+a*10]
+				areas[a].AddTurn(playerlist)
+		else: 
+			playervals = []
+			for i in range(7):
+				randomnums = GenerateRandomValues(0,caixa,len(areas)*10)
+				sum = 0.0F
+				for j in range(len(areas)*10):
+					sum += randomnums[j]
+				factor = (caixa/sum)*0.50 // bots invest 50% less
+				for j in randomnums:
+					j = j*factor
+				playervals.Add(randomnums)
+
+			for a in range(len(areas)):
+				playerlist = array(Player,8)
+				playerlist[0] = Player()
+				playerlist[0].InvestimentoCultura = 0
+				playerlist[0].InvestimentoEducacao = 0
+				playerlist[0].InvestimentoEsporte = 0
+				playerlist[0].InvestimentoInfraestrutura = 0
+				playerlist[0].InvestimentoMeioAmbiente = 0
+				playerlist[0].InvestimentoMobilidade = 0
+				playerlist[0].InvestimentoAgropecuaria = 0
+				playerlist[0].InvestimentoSaude = 0
+				playerlist[0].InvestimentoTrabalho = 0
+				playerlist[0].InvestimentoSeguranca = 0
+				for p in range(1,8):
+					playerlist[p] = Player()
+					playerlist[p].InvestimentoCultura = (playervals[p-1] as (single))[0+a*10]
+					playerlist[p].InvestimentoEducacao = (playervals[p-1] as (single))[1+a*10]
+					playerlist[p].InvestimentoEsporte = (playervals[p-1] as (single))[2+a*10]
+					playerlist[p].InvestimentoInfraestrutura = (playervals[p-1] as (single))[3+a*10]
+					playerlist[p].InvestimentoMeioAmbiente = (playervals[p-1] as (single))[4+a*10]
+					playerlist[p].InvestimentoMobilidade = (playervals[p-1] as (single))[5+a*10]
+					playerlist[p].InvestimentoAgropecuaria = (playervals[p-1] as (single))[6+a*10]
+					playerlist[p].InvestimentoSaude = (playervals[p-1] as (single))[7+a*10]
+					playerlist[p].InvestimentoTrabalho = (playervals[p-1] as (single))[8+a*10]
+					playerlist[p].InvestimentoSeguranca = (playervals[p-1] as (single))[9+a*10]
+				areas[a].AddTurn(playerlist)
 			
 	public def getInvestimentoCulturaPlayer(playernum,turnnum as int) as single:
 		total = 0.0F

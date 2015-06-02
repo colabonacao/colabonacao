@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using System;
 
 public class MySQLAccess : MonoBehaviour {
-	/*private MySqlConnection connection = new MySqlConnection ();
-	private MySqlDataReader rdr;
-	private string server = "127.0.0.1";
-	private string database = "condominio";
+	private MySqlConnection connection = new MySqlConnection ();
+	//private MySqlDataReader rdr;
+	private string server = "colabonacao.mysql.uhserver.com";
+	private string database = "colabonacao";
 	private string uid = "colabonacao";
-	private string password = "colab123";
+	//private string password = "Y4yHd8FjwM2PKgO!";
 
 	public MySQLAccess(string host, string db, string user, string psw)
 	{
 		connection = null;
-		rdr = null;
+		//rdr = null;
 		
 		Initialize(host, db, user, psw);
 		
@@ -25,10 +25,10 @@ public class MySQLAccess : MonoBehaviour {
 		server = host;
 		database = db;
 		uid = user;
-		password = psw;
+		//password = psw;
 		string connectionString;
 		connectionString = "server=" + server + ";" + "database=" +
-			database + ";" + "user=" + uid + ";";
+			database + ";" + "user=" + uid + ";" + "password=" + psw + ";";
 		connection = new MySqlConnection(connectionString);
 	}
 
@@ -73,5 +73,5 @@ public class MySQLAccess : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-	}*/
+	}
 }

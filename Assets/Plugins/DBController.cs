@@ -40,8 +40,9 @@ public class DBController : MonoBehaviour
 	
 	// Get the scores from the MySQL DB to display in a GUIText.
 	// remember to use StartCoroutine when calling this function!
-	public IEnumerator GetScores(string cidade)
+	public IEnumerator GetScores(int index, string cidade)
 	{
+		MySQLResults jogadas = FindObjectOfType (typeof(MySQLResults)) as MySQLResults;
 		WWW hs_get = new WWW(highscoreURL + "cidade=" + WWW.EscapeURL(cidade));
 		//Debug.Log (hs_get.url);
 		yield return hs_get;
@@ -52,7 +53,7 @@ public class DBController : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log(hs_get.text);
+			//Debug.Log(hs_get.text);
 			Dictionary<string, string> json = new Dictionary<string, string>();
 			//string a = "{\"jogadaID\": \"123\", \"cidade\": \"Palmas\", \"populacao\": \"1000000\"};";
 			char[] splitChar = {','};
@@ -63,8 +64,9 @@ public class DBController : MonoBehaviour
 				string[] dados = teste[i].Split(':');
 				if(!json.ContainsKey(dados[0]))
 					json.Add(dados[0], dados[1]);
-				Debug.Log(json[dados[0]]);
+				//Debug.Log(json[dados[0]]);
 			}
+			jogadas.jogadores.Add(index, json);
 			//gameObject.guiText.text = hs_get.text; // this is a GUIText that will display the scores in game.
 		}
 	}

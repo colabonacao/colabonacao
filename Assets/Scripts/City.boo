@@ -6,6 +6,7 @@ class City (MonoBehaviour):
 	private maxturns = 4
 	public orcamento as (single)
 	public MusicName as string
+	public playerlist = array(Player,8)
 	private caixa as single
 	private areas as (Area)
 	private city as City
@@ -63,7 +64,8 @@ class City (MonoBehaviour):
 			return
 		t = turn/2
 		caixa = orcamento[t]/2
-		generateRandomPlayers()
+		if (Application.internetReachability == NetworkReachability.NotReachable):
+			generateRandomPlayers()
 		(GameObject.FindObjectOfType(ButtonHistorico) as ButtonHistorico).activate()
 		for a in areas:
 			a.setSelected(false)
@@ -98,23 +100,20 @@ class City (MonoBehaviour):
 		return targets
   	
 	def generateRandomPlayers():
-		if not (Application.internetReachability == NetworkReachability.NotReachable):
+		if (Application.internetReachability == NetworkReachability.NotReachable):
 			newGame = DBController("Belo Horizonte", "Intermediario")
 			playervals = []
 			selecterPlayers = []
+			results = MySQLResults()
+			results = FindObjectOfType(MySQLResults)
+			
 			for i in range(7):
-				StartCoroutine(newGame.GetScores(citynames[stageChosen.stagePicked]))
-				randomnums = GenerateRandomValues(0,caixa,len(areas)*10)
+				StartCoroutine(newGame.GetScores(i+1, citynames[stageChosen.stagePicked]))	
+
 				sum as single = 0.0F
-				for j in range(len(areas)*10):
-					sum += randomnums[j]
 				factor = (caixa/sum)*0.50 // bots invest 50% less
-				for j in randomnums:
-					j = j*factor
-				playervals.Add(randomnums)
 
 			for a in range(len(areas)):
-				playerlist = array(Player,8)
 				playerlist[0] = Player()
 				playerlist[0].InvestimentoCultura = 0
 				playerlist[0].InvestimentoEducacao = 0
@@ -152,7 +151,6 @@ class City (MonoBehaviour):
 				playervals.Add(randomnums)
 
 			for a in range(len(areas)):
-				playerlist = array(Player,8)
 				playerlist[0] = Player()
 				playerlist[0].InvestimentoCultura = 0
 				playerlist[0].InvestimentoEducacao = 0

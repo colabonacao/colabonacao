@@ -1,0 +1,9 @@
+diff a/Assets/Scripts/City.boo b/Assets/Scripts/City.boo	(rejected hunks)
+@@ -6,6 +6,7 @@
+ 	private maxturns = 4
+ 	public orcamento as (single)
+ 	public MusicName as string
++	public playerlist = array(Player,8)
+ 	private caixa as single
+ 	private areas as (Area)
+ 	private city as City

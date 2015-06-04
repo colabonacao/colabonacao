@@ -9,7 +9,7 @@ class Area (MonoBehaviour):
 	private areaimage as Image = null 
 	public tempCounter = 0.0F
 
-	private turns = []
+	public turns = []
 	
 	def Start ():
 		areaimage = gameObject.GetComponent[of Image]() as Image

@@ -11,7 +11,7 @@ class PopupPrestacao (RegularPopup):
 		super()
 		gameObject.active = false
 		starty = (contentbox.transform as RectTransform).localPosition.y
-	
+		
 	new def Update ():
 		pass
 
@@ -26,3 +26,4 @@ class PopupPrestacao (RegularPopup):
 			(contentbox.transform as RectTransform).localPosition.y = starty - 25
 		else:
 			(contentbox.transform as RectTransform).localPosition.y = starty
+//		Debug.Log(results.investimentoTurnos.Count)

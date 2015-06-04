@@ -60,6 +60,26 @@ class EndTurnPopup (RegularPopup):
 	override def invoke():
 		super()
 		ShowStats(0)
+		results = MySQLResults()
+		results = FindObjectOfType(MySQLResults)
+		areas = GameObject.FindObjectsOfType(Area) as (Area)
+		valores as Dictionary[of string, double] = Dictionary[of string, double]()
+
+		valores.Add("cultura", city.getInvestimentoCulturaPlayer(0,areas[0].turns.Count-1))
+		valores.Add("educacao", city.getInvestimentoEducacaoPlayer(0,areas[0].turns.Count-1))
+		valores.Add("esporte", city.getInvestimentoEsportePlayer(0,areas[0].turns.Count-1))
+		valores.Add("infraestrutura", city.getInvestimentoInfraestruturaPlayer(0,areas[0].turns.Count-1))
+		valores.Add("meioAmbiente", city.getInvestimentoMeioAmbientePlayer(0,areas[0].turns.Count-1))
+		valores.Add("mobilidade", city.getInvestimentoMobilidadePlayer(0,areas[0].turns.Count-1))
+		valores.Add("agropecuaria", city.getInvestimentoAgropecuariaPlayer(0,areas[0].turns.Count-1))
+		valores.Add("saude", city.getInvestimentoSaudePlayer(0,areas[0].turns.Count-1))
+		valores.Add("trabalho", city.getInvestimentoTrabalhoPlayer(0,areas[0].turns.Count-1))
+		valores.Add("seguranca", city.getInvestimentoSegurancaPlayer(0,areas[0].turns.Count-1))
+		
+		results.investimentoTurnos.Add(city.getTurn(), valores)
+		if(results.investimentoTurnos.Count == 4):
+			results.BuildData(city.name, "Intermediario")
+		
 		timer.setPaused(true)
 		if (city.getTurn()+1) == city.getMaxTurns()-1:
 			ContinueButtonText.text = "Último Turno"

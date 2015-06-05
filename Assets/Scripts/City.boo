@@ -96,19 +96,30 @@ class City (MonoBehaviour):
 		for i in range(length):
 			targets[i] = Random.Range(start, end)
 		return targets
-  	
+		
+	def GetPlayersValues(playerID as int, length as int) as (single):
+		targets as (single) = array(single,length)
+		results = FindObjectOfType(MySQLResults)
+		investimentos as (double)
+		investimentos = results.GetValuesList(playerID, getTurn())
+		for i in range(length):
+			targets[i] = investimentos[i]
+		return targets
+
 	def generateRandomPlayers():
 		if not (Application.internetReachability == NetworkReachability.NotReachable):
-			newGame = DBController("Belo Horizonte", "Intermediario")
+			results = FindObjectOfType(MySQLResults)
+			
 			playervals = []
 			selecterPlayers = []
 			for i in range(7):
-				StartCoroutine(newGame.GetScores(citynames[stageChosen.stagePicked]))
-				randomnums = GenerateRandomValues(0,caixa,len(areas)*10)
+				StartCoroutine(results.GetValues(i, citynames[stageChosen.stagePicked]))
+				randomnums = GetPlayersValues(i, len(areas)*10)
+				//randomnums = GenerateRandomValues(0,caixa,len(areas)*10)
 				sum as single = 0.0F
 				for j in range(len(areas)*10):
 					sum += randomnums[j]
-				factor = (caixa/sum)*0.50 // bots invest 50% less
+				factor = (caixa/sum)*1
 				for j in randomnums:
 					j = j*factor
 				playervals.Add(randomnums)
@@ -139,6 +150,7 @@ class City (MonoBehaviour):
 					playerlist[p].InvestimentoTrabalho = (playervals[p-1] as (single))[8+a*10]
 					playerlist[p].InvestimentoSeguranca = (playervals[p-1] as (single))[9+a*10]
 				areas[a].AddTurn(playerlist)
+			results.ListaPlayers()
 		else: 
 			playervals = []
 			for i in range(7):

@@ -75,10 +75,10 @@ class EndTurnPopup (RegularPopup):
 		valores.Add("saude", city.getInvestimentoSaudePlayer(0,areas[0].turns.Count-1))
 		valores.Add("trabalho", city.getInvestimentoTrabalhoPlayer(0,areas[0].turns.Count-1))
 		valores.Add("seguranca", city.getInvestimentoSegurancaPlayer(0,areas[0].turns.Count-1))
-		
+		results.dataJogada.Add(System.DateTime.Now)
 		results.investimentoTurnos.Add(city.getTurn(), valores)
 		if(results.investimentoTurnos.Count == 4):
-			results.BuildData(city.name, "Intermediario")
+			StartCoroutine(results.BuildData(city.name, "Intermediario"))
 		
 		timer.setPaused(true)
 		if (city.getTurn()+1) == city.getMaxTurns()-1:

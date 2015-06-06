@@ -33,8 +33,12 @@ class MMUIManager (MonoBehaviour):
 	"João Pessoa","Curitiba","Recife","Terezina","Rio de Janeiro","Natal","Porto Alegre","Porto Velho",
 	"Boa Vista","Florianópolis","São Paulo","Aracaju","Palmas"]
 	public stagePicked as StageEnum.Stages = StageEnum.Stages.Brasilia
+	public onlineToggle as UI.Toggle
 	
 	def Start() as void:
+		isOnline as bool = (true if PlayerPrefs.GetInt("Online", 1) else false)
+		ToggleOnline(isOnline)
+		onlineToggle.isOn = isOnline
 		if(not PlayerPrefs.HasKey("Aracaju")):
 			PlayerPrefs.SetInt("Aracaju", 1)
 			PlayerPrefs.SetInt("Belém", 0)
@@ -45,7 +49,8 @@ class MMUIManager (MonoBehaviour):
 			PlayerPrefs.SetInt("Recife", 0)
 			PlayerPrefs.SetInt("Rio de Janeiro", 0)
 			PlayerPrefs.SetInt("São Paulo", 0)
-
+		if(not PlayerPrefs.HasKey("Online")):
+			PlayerPrefs.SetInt("Online", 0)
 		creditsArea.SetActive(false)
 		medalArea.SetActive(false)
 		tutorialArea.SetActive(false)
@@ -71,8 +76,13 @@ class MMUIManager (MonoBehaviour):
 		PlayerPrefs.Save()
 		
 	def StartGame ():
-		//newGame = DBController("Belzonte2", "Intermediario")
-		//StartCoroutine(newGame.GetScores(citynames[stageChosen.stagePicked]))
+		results = FindObjectOfType(MySQLResults)
+		for i in range(7):
+			StartCoroutine(results.GetValues(i, citynames[stageChosen.stagePicked]))
+			StartCoroutine(StartGameCo())
+	
+	def StartGameCo() as IEnumerator:
+		yield WaitForSeconds(1.0f)
 		ChangeScene('Main Game')
 	
 	def StartStageSelect ():
@@ -82,6 +92,10 @@ class MMUIManager (MonoBehaviour):
 		mainMenu.GetComponent[of Animator]().SetBool("slideOut", true)
 		stageMenu.GetComponent[of Animator]().SetBool("slideOut", false)
 		//blackBackground.GetComponent[of Animator]().SetBool("toFade", true)
+		
+	def ToggleOnline (newState as bool):
+		Debug.Log(newState)
+		PlayerPrefs.SetInt("Online", (1 if newState else 0))
 		
 	def StopStageSelect ():
 		menuState = 0

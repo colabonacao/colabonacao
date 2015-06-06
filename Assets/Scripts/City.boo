@@ -95,35 +95,35 @@ class City (MonoBehaviour):
 
 		for i in range(length):
 			targets[i] = Random.Range(start, end)
+
+		//Debug.Log(len(targets))
 		return targets
 		
 	def GetPlayersValues(playerID as int, length as int) as (single):
 		targets as (single) = array(single,length)
 		results = FindObjectOfType(MySQLResults)
-		investimentos as (double)
+		investimentos as (single)
 		investimentos = results.GetValuesList(playerID, getTurn())
-		for i in range(length):
-			targets[i] = investimentos[i]
-		return targets
+		if(playerID == 0):
+			for i in range(len(investimentos)):
+				Debug.Log(investimentos[i])
+		return investimentos
 
 	def generateRandomPlayers():
-		if not (Application.internetReachability == NetworkReachability.NotReachable):
-			results = FindObjectOfType(MySQLResults)
-			
+		//Debug.Log(PlayerPrefs.GetInt("Online"))
+		if (PlayerPrefs.GetInt("Online") == 1) and not (Application.internetReachability == NetworkReachability.NotReachable):
+			Debug.Log("Online")
 			playervals = []
 			selecterPlayers = []
 			for i in range(7):
-				StartCoroutine(results.GetValues(i, citynames[stageChosen.stagePicked]))
-				randomnums = GetPlayersValues(i, len(areas)*10)
-				//randomnums = GenerateRandomValues(0,caixa,len(areas)*10)
+				randomnums = GetPlayersValues(i, len(areas))
 				sum as single = 0.0F
-				for j in range(len(areas)*10):
+				for j in range(len(areas)):
 					sum += randomnums[j]
 				factor = (caixa/sum)*1
 				for j in randomnums:
 					j = j*factor
 				playervals.Add(randomnums)
-
 			for a in range(len(areas)):
 				playerlist = array(Player,8)
 				playerlist[0] = Player()
@@ -139,18 +139,17 @@ class City (MonoBehaviour):
 				playerlist[0].InvestimentoSeguranca = 0
 				for p in range(1,8):
 					playerlist[p] = Player()
-					playerlist[p].InvestimentoCultura = (playervals[p-1] as (single))[0+a*10]
-					playerlist[p].InvestimentoEducacao = (playervals[p-1] as (single))[1+a*10]
-					playerlist[p].InvestimentoEsporte = (playervals[p-1] as (single))[2+a*10]
-					playerlist[p].InvestimentoInfraestrutura = (playervals[p-1] as (single))[3+a*10]
-					playerlist[p].InvestimentoMeioAmbiente = (playervals[p-1] as (single))[4+a*10]
-					playerlist[p].InvestimentoMobilidade = (playervals[p-1] as (single))[5+a*10]
-					playerlist[p].InvestimentoAgropecuaria = (playervals[p-1] as (single))[6+a*10]
-					playerlist[p].InvestimentoSaude = (playervals[p-1] as (single))[7+a*10]
-					playerlist[p].InvestimentoTrabalho = (playervals[p-1] as (single))[8+a*10]
-					playerlist[p].InvestimentoSeguranca = (playervals[p-1] as (single))[9+a*10]
+					playerlist[p].InvestimentoCultura = (playervals[p-1] as (single))[0]
+					playerlist[p].InvestimentoEducacao = (playervals[p-1] as (single))[1]
+					playerlist[p].InvestimentoEsporte = (playervals[p-1] as (single))[2]
+					playerlist[p].InvestimentoInfraestrutura = (playervals[p-1] as (single))[3]
+					playerlist[p].InvestimentoMeioAmbiente = (playervals[p-1] as (single))[4]
+					playerlist[p].InvestimentoMobilidade = (playervals[p-1] as (single))[5]
+					playerlist[p].InvestimentoAgropecuaria = (playervals[p-1] as (single))[6]
+					playerlist[p].InvestimentoSaude = (playervals[p-1] as (single))[7]
+					playerlist[p].InvestimentoTrabalho = (playervals[p-1] as (single))[8]
+					playerlist[p].InvestimentoSeguranca = (playervals[p-1] as (single))[9]
 				areas[a].AddTurn(playerlist)
-			results.ListaPlayers()
 		else: 
 			playervals = []
 			for i in range(7):

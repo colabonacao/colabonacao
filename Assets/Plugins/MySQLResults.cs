@@ -11,18 +11,33 @@ public class MySQLResults : MonoBehaviour {
 	public Dictionary<int, Dictionary<string, double>> investimentoTurnos = new Dictionary<int, Dictionary<string, double>>();
 	List<string> queries = new List<string>();
 	public List<System.DateTime> dataJogada = new List<System.DateTime>();
+	public int dicSize;
 	// Use this for initialization
 	void Start () {
 
 	}
 
-	public double[] GetValuesList(int player, int turn)
+	void Awake () {
+		DontDestroyOnLoad (transform.gameObject);
+	}
+
+	void Update () {
+		dicSize = jogadores.Count;	
+	}
+
+	public float[] GetValuesList(int player, int turn)
 	{
-		double[] temp = new double[10];
+		float[] temp = new float[10];
 		int i = 0;
 		foreach(KeyValuePair<string, double> investimento in jogadores[player][turn]){
-			temp[i] = investimento.Value;
-			i++;
+			if(!investimento.Key.Contains("turno"))
+			{
+				float margem = 5;
+				if(investimento.Value > 0)
+					margem = 0;
+				temp[i] = (float)investimento.Value + margem;
+				i++;
+			}
 		}
 			
 		return temp;
@@ -30,7 +45,6 @@ public class MySQLResults : MonoBehaviour {
 
 	public void ListaPlayers()
 	{
-		Debug.Log (jogadores.Count);
 		foreach (KeyValuePair<int, Dictionary<int, Dictionary<string, double>>> item in jogadores) {
 			Debug.Log(item.Key);
 		}
@@ -89,7 +103,7 @@ public class MySQLResults : MonoBehaviour {
 		string getURL = newGameURL + "cidade=" + WWW.EscapeURL (cidade) + "&jogador=" + SystemInfo.deviceUniqueIdentifier;
 		WWW hs_get = new WWW(getURL);
 		yield return hs_get;
-		
+		//System.Single[] randomNums = new float[lenght];
 		if (hs_get.error != null)
 		{
 			print("There was an error getting the high score: " + hs_get.error);

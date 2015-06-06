@@ -8,7 +8,6 @@ class Area (MonoBehaviour):
 	private selectable = true
 	private areaimage as Image = null 
 	public tempCounter = 0.0F
-
 	public turns = []
 	
 	def Start ():

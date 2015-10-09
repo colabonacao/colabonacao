@@ -103,20 +103,20 @@ class City (MonoBehaviour):
 		targets as (single) = array(single,length)
 		results = FindObjectOfType(MySQLResults)
 		investimentos as (single)
-		investimentos = results.GetValuesList(playerID, getTurn())
+		investimentos = results.GetValuesList(playerID, getTurn(), length)
 		if(playerID == 0):
 			for i in range(len(investimentos)):
 				Debug.Log(investimentos[i])
 		return investimentos
 
 	def generateRandomPlayers():
-		//Debug.Log(PlayerPrefs.GetInt("Online"))
 		if (PlayerPrefs.GetInt("Online") == 1) and not (Application.internetReachability == NetworkReachability.NotReachable):
-			Debug.Log("Online")
+			//Debug.Log("Online")
 			playervals = []
 			selecterPlayers = []
 			for i in range(7):
-				randomnums = GetPlayersValues(i, len(areas))
+				Debug.Log(i)
+				randomnums = GetPlayersValues(i+1, len(areas))
 				sum as single = 0.0F
 				for j in range(len(areas)):
 					sum += randomnums[j]

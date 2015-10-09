@@ -78,11 +78,12 @@ class MMUIManager (MonoBehaviour):
 	def StartGame ():
 		results = FindObjectOfType(MySQLResults)
 		for i in range(7):
-			StartCoroutine(results.GetValues(i, citynames[stageChosen.stagePicked]))
+			//Debug.Log(i+1)
+			StartCoroutine(results.GetValues(i+1, citynames[stageChosen.stagePicked]))
 			StartCoroutine(StartGameCo())
 	
 	def StartGameCo() as IEnumerator:
-		yield WaitForSeconds(1.0f)
+		yield WaitForSeconds(3.0f)
 		ChangeScene('Main Game')
 	
 	def StartStageSelect ():
@@ -94,7 +95,6 @@ class MMUIManager (MonoBehaviour):
 		//blackBackground.GetComponent[of Animator]().SetBool("toFade", true)
 		
 	def ToggleOnline (newState as bool):
-		Debug.Log(newState)
 		PlayerPrefs.SetInt("Online", (1 if newState else 0))
 		
 	def StopStageSelect ():

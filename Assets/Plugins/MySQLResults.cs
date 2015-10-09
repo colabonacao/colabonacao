@@ -25,9 +25,9 @@ public class MySQLResults : MonoBehaviour {
 		dicSize = jogadores.Count;	
 	}
 
-	public float[] GetValuesList(int player, int turn)
+	public float[] GetValuesList(int player, int turn, int numAreas)
 	{
-		float[] temp = new float[10];
+		float[] temp = new float[numAreas*10];
 		int i = 0;
 		foreach(KeyValuePair<string, double> investimento in jogadores[player][turn]){
 			if(!investimento.Key.Contains("turno"))
@@ -46,7 +46,7 @@ public class MySQLResults : MonoBehaviour {
 	public void ListaPlayers()
 	{
 		foreach (KeyValuePair<int, Dictionary<int, Dictionary<string, double>>> item in jogadores) {
-			Debug.Log(item.Key);
+			//Debug.Log(item.Key);
 		}
 	}
 
@@ -82,7 +82,7 @@ public class MySQLResults : MonoBehaviour {
 	{
 		//This connects to a server side php script that will add the name and score to a MySQL DB.
 		// Supply it with a string representing the players name and the players score.
-		Debug.Log (post_url);
+		//Debug.Log (post_url);
 		//string post_url = addScoreURL + "cidade=" + WWW.EscapeURL(cidade) + "&dificuldade=" + WWW.EscapeURL(dificuldade) + "&hash=" + hash;
 		// Post the URL to the site and create a download object to get the result.
 		WWW hs_post = new WWW(post_url);
@@ -91,7 +91,7 @@ public class MySQLResults : MonoBehaviour {
 
 		if (hs_post.error != null) {
 			print ("There was an error posting the high score: " + hs_post.error);
-			Debug.Log ("Erro");
+			//Debug.Log ("Erro");
 		} else {
 			//Debug.Log("Sucesso");
 			//result(hs_post.responseHeaders);
@@ -100,17 +100,25 @@ public class MySQLResults : MonoBehaviour {
 
 	public IEnumerator GetValues(int playerID, string cidade)
 	{
+		Debug.Log ("ID: " + playerID);
 		string getURL = newGameURL + "cidade=" + WWW.EscapeURL (cidade) + "&jogador=" + SystemInfo.deviceUniqueIdentifier;
 		WWW hs_get = new WWW(getURL);
 		yield return hs_get;
-		//System.Single[] randomNums = new float[lenght];
+		//Debug.Log (getURL);
 		if (hs_get.error != null)
 		{
-			print("There was an error getting the high score: " + hs_get.error);
+			//Debug.Log("There was an error getting the high score: " + hs_get.error);
 		}
 		else
 		{
+			while(hs_get.text.Length == 0)
+			{
+				getURL = newGameURL + "cidade=" + WWW.EscapeURL (cidade) + "&jogador=" + SystemInfo.deviceUniqueIdentifier;
+				hs_get = new WWW(getURL);
+				yield return hs_get;
+			}
 			string[] retorno = hs_get.text.Substring(0, hs_get.text.Length-1).Split('|');
+			//Debug.Log(retorno.Length);
 			Dictionary<int, Dictionary<string, double>> jogadas = new Dictionary<int, Dictionary<string, double>>();
 			for(int i = 0; i < retorno.Length; i++)
 			{
@@ -128,10 +136,18 @@ public class MySQLResults : MonoBehaviour {
 				{
 					jogadas.Add(i, temp);
 				}
+				else
+				{
+					//Debug.Log("Erro");
+				}
 			}
 			if(!jogadores.ContainsKey(playerID))
 			{
 				jogadores.Add(playerID, jogadas);
+			}
+			else
+			{
+				//Debug.Log("Erro Jogador");
 			}
 		}
 	}
